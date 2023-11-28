@@ -4,14 +4,18 @@
     <title> 
         Login
     </title>
+    <link rel="stylesheet" href="registration.css">
 </head>
 <nav>
-    <a href="Home Page">Home</a>
-    <a href="Products Page">Products</a>
-    <a href="contact-page.html">Contact Us</a>
-    <a href="About Us Page">About Us</a>
-    <a href="login-page.html">Log in</a>
-    <a href="Basket">Basket</a>
+    <ul>
+        <li><a href="Home Page">Home</a></li>
+        <li><a href="Products Page">Products</a></li>
+        <li><a href="contact-page.html">Contact Us</a></li>
+        <li><a href="About Us Page">About Us</a></li>
+        <li><a href="login-page.html">Log in</a></li>
+        <li><a class="active" href="user profile page">User Profile</a> </li>
+        <li><a href="Basket">Basket</a></li>
+    </ul>
 </nav>
 <body>
     <h1>
