@@ -1,44 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <nav>
+        <ul>
+            <li><a href="Home Page">Home</a></li>
+            <li><a href="Products Page">Products</a></li>
+            <li><a class="active" href="contact-page.html">Contact Us</a></li>
+            <li><a href="About Us Page">About Us</a></li>
+            <li><a href="login-page.html">Log in</a></li>
+            <li><a href="user profile page">User Profile</a> </li>
+            <li><a href="basket-page.html">Basket</a></li>
+        </ul>
+    </nav>
+    <link rel="stylesheet" href="registration.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #0000FF;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .main-content {
+            padding: 20px;
+        }
+        h1 {
+            background-color: #0000FF;
+            color: white;
+            padding: 20px;
+        }
+        .product {
+            background-color: lightblue; 
+            margin-bottom: 5px; 
+            padding: 10px; 
+        }
+        .subtotal {
+            display: flex; 
+            justify-content: space-between; 
+            background-color: #0000FF; 
+            color: white; 
+            padding: 10px;
+        }
+        button {
+            margin-top: 10px; 
+            padding: 10px; 
+            background-color: #0000FF;  
+            color: white;
+        }
+        .quantity {
+            margin-left: 10px; 
+            margin-right: 10px; 
+        }
+        .remove {
+            margin-left: 10px; 
+            margin-right: 10px; 
+        }
+        .checkout-form {
+            margin-top: 20px;
+        }
+        .checkout-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .checkout-form input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-    <div id="logo">Logo</div>
-    <nav id="navbar">Nav bar</nav>
-    <div id="basket">Basket</div>
-</header>
+<div class="main-content">
 
-<main id="checkout-section">
     <h1>Checkout</h1>
 
-    <section id="payment-methods">
-        <p>How would you like to pay?</p>
-        <!-- Add payment method logos here -->
-        <!-- Example: -->
-        <!-- img src="/path/to/logo.png" alt="" -->
-        <!-- Repeat for each logo -->
-    </section>
+    <div class="checkout-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
-    <form action="/submit-payment" method="post">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
 
-        <!-- Address input fields -->
-        <!-- Example: -->
-        <!-- label for="">Country:</label -->
-        <!-- input type="" name="" id="" required -->
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required>
 
-        <!-- Repeat for each field -->
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
 
-        <button type="submit">Confirm and Pay</button>
+        <label for="postcode">Postcode:</label>
+        <input type="text" id="postcode" name="postcode" required>
 
-      </form>
+        <label for="payment">Payment Information:</label>
+        <input type="text" id="payment" name="payment" placeholder="Credit Card Number" required>
 
-      </main>
+        <div class="subtotal">
+            Subtotal:
+            <button type="button">Confirm and Pay</button>
+        </div>
+    </div>
 
-      </body>
-      </html>`
+</div>
+
+</body>
+</html>

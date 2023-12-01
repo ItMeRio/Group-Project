@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+    <link rel="stylesheet" href="registration.css">
+</head>
+<nav>
+    <ul>
+        <li><a href="Home Page">Home</a></li>
+        <li><a href="Products Page">Products</a></li>
+        <li><a class="active" href="contact-page.html">Contact Us</a></li>
+        <li><a href="About Us Page">About Us</a></li>
+        <li><a href="login-page.html">Log in</a></li>
+        <li><a href="user profile page">User Profile</a> </li>
+        <li><a href="basket-page.html">Basket</a></li>
+    </ul>
+</nav>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Previous Orders</title>
+    <link rel="stylesheet" href="registration.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,26 +40,78 @@
             margin-bottom: 5px; 
             padding: 10px; 
         }
-
+        .back-to-basket-button,
+        .add-review-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #0033FF;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .add-review-form {
+            display: none;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <div>logo</div>
-    <div>Nav bar</div>
-    <div>basket</div>
-</header>
-
 <div class="main-content">
 
-<h1>Previous orders</h1>
+    <h1>Previous orders</h1>
 
-<div class="product">Product 1 + Details</div>
-<div class="product">Product 2 + Details</div>
-<div class="product">Product 3 + Details</div>
+    <div class="product">
+        Product 1 + Details
+        <button class="add-review-button" onclick="showReviewForm('product1')">Add Review</button>
+        <form class="add-review-form" id="reviewFormProduct1">
+            <label for="reviewProduct1">Review:</label>
+            <input type="text" id="reviewProduct1" name="reviewProduct1">
+            <button type="button" onclick="submitReview('product1')">Submit Review</button>
+        </form>
+    </div>
+
+    <div class="product">
+        Product 2 + Details
+        <button class="add-review-button" onclick="showReviewForm('product2')">Add Review</button>
+        <form class="add-review-form" id="reviewFormProduct2">
+            <label for="reviewProduct2">Review:</label>
+            <input type="text" id="reviewProduct2" name="reviewProduct2">
+            <button type="button" onclick="submitReview('product2')">Submit Review</button>
+        </form>
+    </div>
+
+    <div class="product">
+        Product 3 + Details
+        <button class="add-review-button" onclick="showReviewForm('product3')">Add Review</button>
+        <form class="add-review-form" id="reviewFormProduct3">
+            <label for="reviewProduct3">Review:</label>
+            <input type="text" id="reviewProduct3" name="reviewProduct3">
+            <button type="button" onclick="submitReview('product3')">Submit Review</button>
+        </form>
+    </div>
+
+    <button class="back-to-basket-button" onclick="window.location.href='basket-page.html'">Back to Basket</button>
 
 </div>
+
+<script>
+    function showReviewForm(product) {
+        document.getElementById(`reviewForm${product}`).style.display = "block";
+    }
+
+    function submitReview(product) {
+        const review = document.getElementById(`review${product}`).value;
+        // Implement your logic to handle the review submission, e.g., send it to a server
+        alert(`Review for ${product}: ${review} submitted successfully!`);
+        // Reset the form
+        document.getElementById(`reviewForm${product}`).reset();
+        // Hide the form after submission
+        document.getElementById(`reviewForm${product}`).style.display = "none";
+    }
+</script>
 
 </body>
 </html>
