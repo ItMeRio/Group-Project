@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <link rel="stylesheet" href="baskets.css">
     <link rel="stylesheet" href="registration.css">
+
+    <title>Previous Orders</title>
 </head>
+<body>
+
 <nav>
     <ul>
         <li><a href="Home Page">Home</a></li>
@@ -13,51 +19,6 @@
         <li><a href="basket-page.html">Basket</a></li>
     </ul>
 </nav>
-<head>
-    <title>Previous Orders</title>
-    <link rel="stylesheet" href="registration.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        header {
-            background-color: #0000FF;
-            color: white;
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-        }
-        .main-content {
-            padding: 20px;
-        }
-        h1 {
-            background-color: #0000FF;
-            color: white;
-            padding: 20px;
-        }
-        .product {
-            background-color: lightblue; 
-            margin-bottom: 5px; 
-            padding: 10px; 
-        }
-        .back-to-basket-button,
-        .add-review-button {
-            display: inline-block;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #0033FF;
-            color: white;
-            text-decoration: none;
-            text-align: center;
-            border-radius: 5px;
-        }
-        .add-review-form {
-            display: none;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
 
 <div class="main-content">
 
@@ -97,21 +58,7 @@
 
 </div>
 
-<script>
-    function showReviewForm(product) {
-        document.getElementById(`reviewForm${product}`).style.display = "block";
-    }
-
-    function submitReview(product) {
-        const review = document.getElementById(`review${product}`).value;
-        // Implement your logic to handle the review submission, e.g., send it to a server
-        alert(`Review for ${product}: ${review} submitted successfully!`);
-        // Reset the form
-        document.getElementById(`reviewForm${product}`).reset();
-        // Hide the form after submission
-        document.getElementById(`reviewForm${product}`).style.display = "none";
-    }
-</script>
+<script src="baskets.js"></script>
 
 </body>
 </html>
