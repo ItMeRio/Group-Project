@@ -20,6 +20,21 @@
             padding: 1em 0;
         }
 
+        nav {
+            display: flex;
+            justify-content: flex-start; /* Align headers to the left */
+            background-color: #333;
+            padding: 1em 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 20px; /* Adjust the right margin as needed */
+        }
+
         #top-right {
             position: absolute;
             top: 10px;
@@ -55,11 +70,13 @@
             height: 200px;
             margin: 10px;
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #000; /* Black border */
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text color */
         }
     </style>
 </head>
@@ -68,7 +85,15 @@
 
     <header>
         <h1>Shoe Emporium</h1>
-        <p>Your One-Stop Shop for Stylish Shoes</p>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Contact Us</a>
+            <a href="#">About Us</a>
+            <a href="#">Log In</a>
+            <a href="#">User</a>
+            <a href="#">Basket</a>
+        </nav>
         <div id="top-right">
             <div id="basket-icon">🛒</div>
             <div id="user-account">User Account</div>
@@ -118,8 +143,4 @@
 
 </body>
 
-</html> 
-
-
-
-
+</html>

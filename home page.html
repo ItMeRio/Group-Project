@@ -4,29 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page - Shoe Emporium</title>
+    <title>Product Page - Shoe Emporium</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #ccc; /* Grey background */
         }
 
         header {
             background-color: #333;
             color: #fff;
-            padding: 10px;
+            text-align: left; /* Align the text to the left */
+            padding: 1em 20px; /* Add padding to the left */
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            align-items: center; /* Align items vertically */
         }
 
-        #logo {
-            width: 50px; /* Adjust the size as needed */
+        nav {
+            display: flex;
+            gap: 20px; /* Add space between navigation items */
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         #top-right {
+            margin-left: auto; /* Move the top-right section to the right */
             display: flex;
             align-items: center;
         }
@@ -34,15 +42,6 @@
         #basket-icon,
         #user-account {
             margin-left: 10px;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        nav {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
         }
 
         section {
@@ -54,24 +53,26 @@
             text-align: center;
         }
 
-        .category-container {
+        #product-container {
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            height: 70vh; /* Adjust the height as needed */
         }
 
-        .category-box {
+        .product {
             width: 200px;
             height: 200px;
             margin: 10px;
-            padding: 20px;
-            border: 1px solid #ccc;
+            padding: 10px;
+            border: 1px solid #000; /* Black border */
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            align-items: center;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text color */
         }
     </style>
 </head>
@@ -79,43 +80,58 @@
 <body>
 
     <header>
-        <img id="logo" src="path/to/your/logo.png" alt="Logo">
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Product</a>
+            <a href="#">Contact Us</a>
+            <a href="#">About Us</a>
+            <a href="#">Log In</a>
+            <a href="#">User</a>
+            <a href="#">Basket</a>
+        </nav>
         <div id="top-right">
             <div id="basket-icon">🛒</div>
             <div id="user-account">User Account</div>
         </div>
     </header>
 
-    <nav>
-        <!-- Add your navigation links here -->
-        <a href="#">Home</a>
-        <a href="#">Category 1</a>
-        <a href="#">Category 2</a>
-        <a href="#">Category 3</a>
-        <a href="#">Category 4</a>
-    </nav>
-
     <section>
-        <h2>Featured Categories</h2>
-        <div class="category-container">
-            <div class="category-box">
-                <h3>Category 1</h3>
-                <!-- Add content for Category 1 -->
+        <h2>Featured Products</h2>
+        <div id="product-container">
+            <!-- Product 1 -->
+            <div class="product">
+                <h3>Product 1</h3>
+                <!-- Add product details here -->
             </div>
 
-            <div class="category-box">
-                <h3>Category 2</h3>
-                <!-- Add content for Category 2 -->
+            <!-- Product 2 -->
+            <div class="product">
+                <h3>Product 2</h3>
+                <!-- Add product details here -->
             </div>
 
-            <div class="category-box">
-                <h3>Category 3</h3>
-                <!-- Add content for Category 3 -->
+            <!-- Product 3 -->
+            <div class="product">
+                <h3>Product 3</h3>
+                <!-- Add product details here -->
             </div>
 
-            <div class="category-box">
-                <h3>Category 4</h3>
-                <!-- Add content for Category 4 -->
+            <!-- Product 4 -->
+            <div class="product">
+                <h3>Product 4</h3>
+                <!-- Add product details here -->
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product">
+                <h3>Product 5</h3>
+                <!-- Add product details here -->
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product">
+                <h3>Product 6</h3>
+                <!-- Add product details here -->
             </div>
         </div>
     </section>
@@ -123,4 +139,3 @@
 </body>
 
 </html>
-
