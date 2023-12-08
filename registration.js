@@ -9,8 +9,3 @@ pwShowHide.forEach(eyeIcon => {
     })
 })
 
-links.forEach(link =>{ 
-    link.addEventListener("click",=>{
-        preventDefault();
-    })
-})
