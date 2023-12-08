@@ -11,3 +11,14 @@ function submitReview(product) {
     // Hide the form after submission
     document.getElementById(`reviewForm${product}`).style.display = "none";
 }
+
+function addToBasket() {
+    const productDiv = this.closest('.product');
+    const productName = productDiv.textContent.trim().split(' + ')[0];
+    const quantity = productDiv.querySelector('.quantity input').value;
+};
+
+function removeFromBasket() {
+    const productDiv = this.closest('.product');
+    const productName = productDiv.textContent.trim().split(' + ')[0];
+};    
