@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ccc; /* Grey background */
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: left; /* Align the text to the left */
+    padding: 1em 20px; /* Add padding to the left */
+    display: flex;
+    align-items: center; /* Align items vertically */
+    display: none; /* Hide the header */
+}
+
+
+#top-right {
+    margin-left: auto; /* Move the top-right section to the right */
+    display: flex;
+    align-items: center;
+}
+
+#basket-icon,
+#user-account {
+    margin-left: 10px;
+}
+
+section {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 70vh; /* Adjust the height as needed */
+}
+
+.product {
+    width: 400px; /* Adjusted width for four boxes in a row */
+    height: 200px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000; /* Black border */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+}
+
+
+/*product page:*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+
+}
+
+#top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+
+section {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    height: 70vh; /* Adjust the height as needed */
+}
+
+.product {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #000; /* Black border */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #000; /* Black background */
+    color: #fff; /* White text color */
+}
+
+/* about us page */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ccc; /* Grey background */
+  }
+
+  
+  section {
+    padding: 20px;
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  #mission-section {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  #review-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
