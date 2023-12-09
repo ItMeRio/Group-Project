@@ -1,3 +1,13 @@
+<?php
+
+require_once ('connect.php');
+
+$sql = "SELECT product_name, price, img FROM products";
+$result = $conn->query($sql);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -83,10 +93,10 @@
 
         #product-container {
             display: flex;
-            flex-wrap: wrap;
+            overflow: hidden;
             justify-content: space-around;
-            align-items: center;
-            height: 70vh; /* Adjust the height as needed */
+            flex-wrap: wrap;
+            height: 22vh; /* Adjust the height as needed */
         }
 
         .product {
@@ -105,7 +115,7 @@
 
         .product img {
             max-width: 100%;
-            max-height: 80%; /* Adjusted height for the image */
+            max-height: 60%; /* Adjusted height for the image */
             margin-bottom: 10px; /* Added margin below the image */
         }
 
@@ -122,7 +132,19 @@
             border-radius: 5px;
             cursor: pointer;
         }
-    </style>
+
+        @media only screen and (max-width: 768px) {
+        #product-container {
+            flex-direction: column; /* Change to a column layout on smaller screens */
+            align-items: center;
+        }
+
+        .product {
+            width: 80%; /* Adjust the width for better responsiveness on smaller screens */
+        }
+    }
+    </style> 
+        
 </head>
 
 <body>
@@ -145,30 +167,39 @@
     </header>
 
     <div id="search-container">
-        <input type="text" id="search-bar" placeholder="Search...">
+        <input type="text" id="search-bar" class="input" placeholder="Search...">
         <button id="search-btn">Search</button>
     </div>
 
     <section>
         <h2>Featured Products</h2>
-        <div id="product-container">
-            <!-- Product 1 -->
-            <div class="product">
-                <img src="your_image_url_1.jpg" alt="Product 1">
-                <h3>Product 1</h3>
-                <p>$19.99</p>
-                <button>Add to Cart</button>
-            </div>
+        
+        <?php
+echo '<div id="product-container">'; // Start the container outside the loop
 
-            <!-- Product 2 -->
-            <div class="product">
-                <img src="your_image_url_2.jpg" alt="Product 2">
-                <h3>Product 2</h3>
-                <p>$19.99</p>
-                <button>Add to Cart</button>
-            </div>
+$counter = 0;
 
-            <!-- Product 3 -->
-            <div class="product">
-                <img src="your_image_url_3.jpg" alt="Product
+while($row = mysqli_fetch_assoc($result)) {
+    // Product inside a row
+    echo '<div class="product">';
+    echo '<img src="data:image/jpeg;base64,'.base64_encode($row['img']).'"/>';
+    echo '<h3 class="name">'.$row["product_name"].'</h3>';
+    echo '<p>'.$row["price"].'</p>';
+    echo '<button>Add to Cart</button>';
+    echo '</div>'; // Close the product div
 
+    $counter++;
+
+    // Check if four products are displayed, then start a new row
+    if ($counter % 4 == 0) {
+        echo '</div><div id="product-container">'; // Close and reopen the container
+    }
+}
+
+echo '</div>'; // Close the container after the loop
+?>
+    </section>
+
+</body>
+
+</html>
