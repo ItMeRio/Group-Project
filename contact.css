@@ -37,12 +37,15 @@ body {
     display:flex;
     justify-content: center;
     margin-top: 50px;
+    background-color: ;
   }
   
   form {
     width: 33%;
     background-color: #a9f7e5;
     margin-top: 50px;
+    padding:10px 10px;
+    border-radius: 10px;
   }
   
   label {
@@ -53,7 +56,8 @@ body {
   
   input,
   textarea {
-    width: 100%;
+
+    width:80%;
     padding: 8px;
     margin-bottom: 10px;
     color: black;
