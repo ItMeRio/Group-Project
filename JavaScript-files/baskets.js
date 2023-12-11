@@ -1,21 +1,21 @@
-function showReviewForm(product) {
-    document.getElementById(`reviewForm${product}`).style.display = "block";
+function showReviewForm(product1) {
+    document.getElementById(`reviewForm${product1}`).style.display = "block";
 }
 
-function submitReview(product) {
-    const review = document.getElementById(`review${product}`).value;
+function submitReview(product1) {
+    const review = document.getElementById(`review${product1}`).value;
     // Implement your logic to handle the review submission, e.g., send it to a server
-    alert(`Review for ${product}: ${review} submitted successfully!`);
+    alert(`Review for ${product1}: ${review} submitted successfully!`);
     // Reset the form
-    document.getElementById(`reviewForm${product}`).reset();
+    document.getElementById(`reviewForm${product1}`).reset();
     // Hide the form after submission
-    document.getElementById(`reviewForm${product}`).style.display = "none";
+    document.getElementById(`reviewForm${product1}`).style.display = "none";
 }
 
 let basketItems = []; // Simulating the basket as an array
 
 function addToBasket() {
-    const productDiv = this.closest('.product');
+    const productDiv = this.closest('.product1');
     const productName = productDiv.textContent.trim().split(' + ')[0];
     const quantity = parseInt(productDiv.querySelector('.quantity input').value, 10);
 
@@ -34,7 +34,7 @@ function addToBasket() {
 }
 
 function removeFromBasket() {
-    const productDiv = this.closest('.product');
+    const productDiv = this.closest('.product1');
     const productName = productDiv.textContent.trim().split(' + ')[0];
 
     // Find the index of the product in the basket
@@ -58,3 +58,4 @@ function updateBasket() {
         basketDiv.appendChild(itemDiv);
     });
 }
+
