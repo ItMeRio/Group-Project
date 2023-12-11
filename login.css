@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: center;
     background: rgb(243,243,252);
-background: linear-gradient(41deg, rgba(243,243,252,1) 0%, rgba(200,200,221,1) 0%, rgba(208,215,235,1) 9%, rgba(160,201,214,1) 58%, rgba(154,202,213,1) 77%, rgba(81,224,252,1) 90%);
+    background: linear-gradient(41deg, rgba(243,243,252,1) 0%, rgba(200,200,221,1) 0%, rgba(208,215,235,1) 9%, rgba(160,201,214,1) 58%, rgba(154,202,213,1) 77%, rgba(81,224,252,1) 90%);
     column-gap: 50px;
 }
 .form{

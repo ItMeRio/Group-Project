@@ -1,6 +1,8 @@
+
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Very light grey */
+    background: rgb(158, 158, 168);
     color: black;
   }
   
@@ -17,10 +19,14 @@ body {
   }
   
   h1 {
-    background-color: #333; /* Dark grey */
+    background-color: #046865; /* Dark grey */
     color: white;
+    display:flex; 
+    justify-content: center;
     padding: 20px;
   }
+
+
   
   .contact-container {
     display: flex;
@@ -28,11 +34,15 @@ body {
   
   .map-container {
     width: 50%;
-    margin-right: 20px;
+    display:flex;
+    justify-content: center;
+    margin-top: 50px;
   }
   
   form {
-    width: 50%;
+    width: 33%;
+    background-color: #93ffe6;
+    margin-top: 50px;
   }
   
   label {
@@ -62,6 +72,6 @@ body {
   }
   
   input[type="submit"]:hover {
-    background-color: #555; /* Darker grey on hover */
+    background-color: #046865; /* Darker grey on hover */
   }
   
