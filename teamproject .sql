@@ -177,7 +177,7 @@ INSERT INTO `sections` (`section_ID`, `section_name`) VALUES
 
 CREATE TABLE `users` (
   `users_id` int(11) NOT NULL,
-  `username` varchar(255) DEFAULT NULL,
+  `fullName` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `user_type` enum('client','admin') DEFAULT NULL
