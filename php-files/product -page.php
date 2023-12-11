@@ -5,10 +5,11 @@ if (isset($_GET['search'])) {
     $search = mysqli_real_escape_string($conn, $_GET['search']);
 
     // Modify the SQL query to include a WHERE clause for searching
-    $sql = "SELECT product_name, price, img, color, brand FROM products WHERE product_name LIKE '%$search%'";
+    $sql = "SELECT products_ID, product_name, price, img, color, brand FROM products WHERE product_name LIKE '%$search%'";
+
 } else {
     // Default query without search filter
-    $sql = "SELECT product_name, price, img, color, brand FROM products";
+    $sql = "SELECT products_ID, product_name, price, img, color, brand FROM products";
 }
 
 $result_products = $conn->query($sql); // Store the result in a different variable
@@ -160,6 +161,7 @@ section {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;
 }
 
 
@@ -270,8 +272,11 @@ while ($row = mysqli_fetch_assoc($result_products)) {
     echo '<h5 class="name">' . $row["product_name"] . '</h5>';
     echo '<p class="details">' . $row["brand"] . ', ' . $row["color"] . '</p>';
     echo '<p>' . $row["price"] . ' £</p>';
-    echo '<button>Add to Cart</button>';
-    echo '</div>'; // Close the product div
+    echo '<form method="POST" action="insert_order_item.php">';
+    echo '<input type="hidden" name="product_ID" value="' . $row["products_ID"] . '">';
+    echo '<button class="add-to-cart" data-product-id=" '. $row["products_ID"] .' " data-quantity="1">Add to Cart</button>';
+    echo '</form>';
+    echo '</div>'; 
 
     $counter++;
 
@@ -324,6 +329,41 @@ echo '</div>'; // Close the container after the loop
         // Call the filter function on page load
         filterProducts();
     });
+
+    $(document).ready(function () {
+    $(document).on('click', '.add-to-cart', function () {
+        var products_ID = $(this).data('product_ID');
+        var quantity = $(this).data('quantity');
+
+        console.log('Adding to cart:', products_ID, 'Quantity:', quantity);
+
+        // Increment the quantity
+        quantity++;
+
+        // Update the data-quantity attribute
+        $(this).data('quantity', quantity);
+
+        // Send an AJAX request to update the quantity on the server
+        $.ajax({
+            type: 'POST',
+            url: 'update_quantity.php', // Replace with the actual URL of your server-side script
+            data: {
+                products_ID: products_ID,
+                quantity: quantity
+            },
+            success: function (response) {
+                console.log('Server response:', response);
+                // You can update the UI or perform additional actions based on the server response
+            },
+            error: function (error) {
+                console.error('Error updating quantity:', error);
+            }
+        });
+    });
+});
+
+
+
 </script>
 
 </body>
