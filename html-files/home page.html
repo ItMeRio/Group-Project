@@ -13,37 +13,33 @@
             margin: 0;
             padding: 0;
             background-color: #ccc; /* Grey background */
+            color: black; /* Black text color */
         }
 
         header {
-            background-color: #333;
-            color: #fff;
-            text-align: left; /* Align the text to the left */
-            padding: 1em 20px; /* Add padding to the left */
+            background-color: #FFD6BA; /* Light Orange */
+            color: black; /* Black text color */
+            padding: 10px 20px; /* Add padding to the left and right */
             display: flex;
+            justify-content: space-between; /* Spread items horizontally */
             align-items: center; /* Align items vertically */
         }
 
-        nav {
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
             display: flex;
-            gap: 20px; /* Add space between navigation items */
+        }
+
+        nav li {
+            margin-right: 20px; /* Add space between navigation items */
         }
 
         nav a {
-            color: #fff;
+            color: black; /* Black text color */
             text-decoration: none;
             font-weight: bold;
-        }
-
-        #top-right {
-            margin-left: auto; /* Move the top-right section to the right */
-            display: flex;
-            align-items: center;
-        }
-
-        #basket-icon,
-        #user-account {
-            margin-left: 10px;
         }
 
         section {
@@ -53,6 +49,12 @@
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+        }
+
+        section h2 {
+            background-color: #046865; /* Updated background color */
+            color: white;
+            padding: 10px;
         }
 
         #product-container {
@@ -82,6 +84,7 @@
 <body>
 
     <header>
+        <h1>Shoe Emporium</h1>
         <nav>
             <ul>
                 <li><a href="home page.html">Home</a></li>
@@ -92,7 +95,7 @@
                 <li><a href="sign-in page.html">Sign in</a> </li>
                 <li><a href="basket-page.html">Basket</a></li>
             </ul>
-          </nav>
+        </nav>
     </header>
 
     <section>
