@@ -1,88 +1,84 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5; /* Very light grey */
+    background-color: #808080; /* Grey */
     color: black;
 }
 
-header {
-    background-color: #333; /* Dark grey */
-    color: white;
-    padding: 10px 20px;
+nav {
+    background-color: white; /* White for nav bar */
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Adding a subtle shadow for depth */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+}
+
+nav li {
+    padding: 0 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000; /* Dark text for contrast */
+    font-weight: bold;
 }
 
 .main-content {
     padding: 20px;
+    background-color: #f0f0f0; /* Lighter grey for contrast */
+    border-radius: 8px; /* Rounded corners for modern look */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adding shadow for depth */
 }
 
 h1 {
-    background-color: #333; /* Dark grey */
-    color: white;
-    padding: 20px;
+    color: #000080; /* Dark blue */
+    background-color: transparent; /* Removing background */
+    padding-bottom: 20px;
+    border-bottom: 2px solid #000080; /* Adding a bottom border */
 }
 
 .product {
-    background-color: #d3d3d3; /* Light grey for panels */
-    margin-bottom: 5px; 
-    padding: 10px; 
-    border: 1px solid black; /* Black outline */
+    background-color: #d9d9d9; /* Slightly lighter grey */
+    margin-bottom: 10px; 
+    padding: 20px; 
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Removing black outline */
 }
 
 .subtotal {
     display: flex; 
     justify-content: space-between; 
-    background-color: #333; /* Dark grey */
-    color: white; 
-    padding: 10px;
+    background-color: #f0f0f0; /* Lighter grey */
+    color: black; /* Changing text color for contrast */
+    padding: 15px;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Adding shadow */
 }
 
 button {
     margin-top: 10px; 
     padding: 10px; 
-    background-color: #666; /* Slightly less light grey for buttons */
+    background-color: #666; /* Keeping button color */
     color: white;
+    border: none; /* Removing border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Cursor change on hover */
 }
 
-.quantity {
-    margin-left: 10px; 
-    margin-right: 10px; 
-}
-
-.remove {
-    margin-left: 10px; 
-    margin-right: 10px; 
+.quantity, .remove {
+    margin: 10px 0; 
 }
 
 .checkout-button,
 .previous-order-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #999; /* Less light grey for buttons */
+    background-color: #2b51ec; /* Changed to a blue shade */
     color: white;
     text-decoration: none;
     text-align: center;
     border-radius: 5px;
-}
-
-.checkout-form {
-    margin-top: 20px;
-}
-
-.checkout-form label {
-    display: block;
-    margin-bottom: 5px;
-    color: black; /* Black text */
-}
-
-.checkout-form input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    color: black; /* Black text */
-}
-
-.add-review-form {
-    display: none;
+    cursor: pointer;
 }
