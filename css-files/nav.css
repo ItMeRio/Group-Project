@@ -1,0 +1,107 @@
+/* styles.css */
+
+/* Reset some basic elements */
+body, h1, ul, li, a, form, input, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    text-decoration: none;
+  }
+  
+  /* Body and overall layout */
+  body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  /* Header and navbar styles */
+  header {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+  }
+  
+  .nav-brand h1 {
+    font-size: 2rem;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-links li a {
+    color: #fff;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+  }
+  
+  .nav-links li a:hover {
+    color: #ccc;
+  }
+  
+  .nav-user a {
+    color: #fff;
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+  }
+  
+  .nav-user a:hover {
+    color: #ccc;
+  }
+  
+  .nav-search form {
+    display: flex;
+  }
+  
+  .nav-search input {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .nav-search button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .nav-search button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .nav-links,
+    .nav-user {
+      display: none; /* Hide nav links on smaller screens */
+    }
+  
+    .nav-search {
+      flex: 1;
+    }
+  
+    .nav-search form {
+      width: 100%;
+    }
+  }
+  
+  /* Basket icon specific styles */
+  .nav-user img {
+    width: 24px; /* Adjust size as needed */
+    height: auto;
+  }
+  

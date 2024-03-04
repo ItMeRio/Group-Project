@@ -1,0 +1,164 @@
+/* main.css */
+
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Establishing color scheme based on the screenshot */
+  :root {
+    --primary-color: #000; /* Black for primary elements */
+    --secondary-color: #fff; /* White for backgrounds and contrast */
+    --accent-color: #4CAF50; /* Green for buttons and interactive elements */
+    --text-color: #333; /* Dark grey for text */
+    --border-color: #ddd; /* Light grey for borders and lines */
+  }
+  
+  /* Set default font and background for the body to match the screenshot */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+  
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--primary-color);
+    margin-bottom: 1.2rem;
+  }
+  
+  p {
+    margin-bottom: 1rem;
+  }
+  
+  /* Link styles */
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Button styles to match the green buttons in the screenshot */
+  button, .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accent-color); /* Green */
+    color: var(--secondary-color); /* White */
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover, .button:hover {
+    background-color: darken(var(--accent-color), 10%);
+  }
+  
+  /* Input styles */
+  input[type="text"], input[type="search"], input[type="email"], input[type="password"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+  }
+  
+  /* Styling the form submission button to match the green buttons */
+  input[type="submit"], .submit-button {
+    background-color: var(--accent-color); /* Green */
+    color: var(--secondary-color); /* White */
+    border-color: darken(var(--accent-color), 10%);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  input[type="submit"]:hover, .submit-button:hover {
+    background-color: darken(var(--accent-color), 10%);
+  }
+  
+  /* Utility classes for spacing */
+  .mt { margin-top: 1rem; }
+  .mb { margin-bottom: 1rem; }
+  .ml { margin-left: 1rem; }
+  .mr { margin-right: 1rem; }
+  .pt { padding-top: 1rem; }
+  .pb { padding-bottom: 1rem; }
+  .pl { padding-left: 1rem; }
+  .pr { padding-right: 1rem; }
+  
+  /* Container for content alignment and padding */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* Card styles for products */
+  .card {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .card img {
+    width: 100%;
+    display: block;
+  }
+  
+  .card-content {
+    padding: 20px;
+    background-color: var(--secondary-color);
+  }
+  
+  .card-title {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .card-text {
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  /* Responsive grid for product layout */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .column {
+    flex: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .row {
+      flex-direction: column;
+    }
+  }
+  
+  /* Additional responsive adjustments as needed */
+  @media screen and (max-width: 600px) {
+    .navbar .nav-search form input[type="search"] {
+      width: auto;
+      flex-grow: 1;
+    }
+  
+    .navbar .nav-search form button {
+      width: auto;
+    }
+  }
+  
