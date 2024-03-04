@@ -1,0 +1,137 @@
+*{
+    margin:0;
+    padding:0; 
+    box-sizing: border-box;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.container{
+    height:100vh;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(243,243,252);
+    background: linear-gradient(41deg, rgba(243,243,252,1) 0%, rgba(200,200,221,1) 0%, rgba(208,215,235,1) 9%, rgba(160,201,214,1) 58%, rgba(154,202,213,1) 77%, rgba(81,224,252,1) 90%);
+    column-gap: 50px;
+}
+.form{
+    max-width: 400px;
+    width:100%;
+    padding:30px;
+    border-radius: 15px;
+    background-color: #93ffe6;
+}
+
+
+header{
+    font-size: 30;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+form{
+    margin-top:30px;
+}
+
+.form .field{
+    position: relative;
+    height:45px;
+    width: 100%;
+    margin-top:20px;
+    border-radius: 10px;
+}
+.field input,
+.field button{
+    height:100%;
+    width:100%;
+    border:none;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 10px;
+}
+.field input{
+    outline: none;
+    padding:0 15px;
+    border:1px solid#313131;
+}
+.field input:focus{
+    border-bottom-width:2px;
+}
+.eye-icon{
+    position: absolute;
+    top:50%;
+    right:10px;
+    transform:translateY(-50%);
+    font-size: 20px;
+    color: #313131;
+    cursor: pointer;
+    padding:10px
+}
+.field button{
+    color: black;
+    background-color: aqua;
+
+}
+.field button:hover{
+    color: azure;
+    background-color: darkblue;
+}
+.form-link{
+    text-align:center;
+    margin-top:10px;
+}
+
+.form-link span, 
+.form-link a{
+    font-size: 16px;
+    font-weight: 400;
+    color: 0;
+}
+.form a{
+    color: rgb(26, 9, 43);
+    text-decoration: none;
+}
+form a:hover{
+    text-decoration: underline;
+}
+.line{
+    position: relative;
+    height:1px;
+    width:100%;
+    margin:36px 0; 
+    background-color: black;
+}
+.line::before{
+    content:'Or';
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background-color: #93ffe6;
+    color:rgb(0, 0, 0);
+    padding: 0 15px;
+}
+
+.media-options a{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  
+}
+a.facebook{
+    color: #ffffff;
+    font-weight: 600;
+    background-color: 	#1877F2;
+}
+
+a.google{
+    color: #000000;
+    font-weight: 600;
+    background-color: #DB4437;
+}
+header{
+    font-size: 30px;
+    color: #000000;
+    
+}

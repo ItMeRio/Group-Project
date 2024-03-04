@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css-files/registration.css">
+    <link rel="stylesheet" href="/css-files/login.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page - Shoe Emporium</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: flex-start; /* Align headers to the left */
+            background-color: #333;
+            padding: 1em 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            margin-right: 20px; /* Adjust the right margin as needed */
+        }
+
+        #top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        #basket-icon,
+        #user-account {
+            margin-left: 10px;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        #product-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            height: 70vh; /* Adjust the height as needed */
+        }
+
+        .product {
+            width: 200px;
+            height: 250px; /* Adjusted height for more content */
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #000; /* Black border */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Added space between content */
+            background-color: #000; /* Black background */
+            color: #fff; /* White text color */
+        }
+
+        .product img {
+            max-width: 100%;
+            max-height: 80%; /* Adjusted height for the image */
+            margin-bottom: 10px; /* Added margin below the image */
+        }
+
+        .product h3,
+        .product p {
+            margin: 0;
+        }
+
+        .product button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Shoe Emporium</h1>
+        <nav>
+            <ul>
+                <li><a href="home page.html">Home</a></li>
+                <li><a href="product -page.html">Products</a></li>
+                <li><a href="contact-page.html">Contact Us</a></li>
+                <li><a href="about us page.html">About Us</a></li>
+                <li><a href="registration.html">Registration</a></li>
+                <li><a href="sign-in page.html">Sign in</a> </li>
+                <li><a href="basket-page.html">Basket</a></li>
+            </ul>
+          </nav>
+    </header>
+
+    <section>
+        <h2>Featured Products</h2>
+        <div id="product-container">
+            <!-- Product 1 -->
+            <div class="product">
+                <img src="your_image_url_1.jpg" alt="Product 1">
+                <h3>Product 1</h3>
+                <p>$19.99</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product">
+                <img src="your_image_url_2.jpg" alt="Product 2">
+                <h3>Product 2</h3>
+                <p>$19.99</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product">
+                <img src="your_image_url_3.jpg" alt="Product 3">
+                <h3>Product 3</h3>
+                <p>$19.99</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product">
+                <img src="your_image_url_4.jpg" alt="Product 4">
+                <h3>Product 4</h3>
+                <p>$19.99</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product">
+                <img src="your_image_url_5.jpg" alt="Product 5">
+                <h3>Product 5</h3>
+                <p>$19.99</p>
+                <button>Add to Cart</button>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product">
+                <img src="your_image_url_6.jpg" alt="Product 6">
+                <h3>Product 6</h3>
+                <p>$19.99</p>
+                <button>Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
