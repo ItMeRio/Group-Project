@@ -1,0 +1,50 @@
+.main-content {
+    padding: 20px;
+    background-color: #f0f0f0; /* Lighter grey for contrast */
+    border-radius: 8px; /* Rounded corners for modern look */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Adding shadow for depth */
+}
+
+
+
+.product {
+    background-color: #424141; /* Slightly lighter grey */
+    margin-bottom: 10px; 
+    padding: 20px; 
+    border-radius: 5px; /* Rounded corners */
+    border: none; /* Removing black outline */
+}
+
+.subtotal {
+    display: flex; 
+    justify-content: space-between; 
+    background-color: #f0f0f0; /* Lighter grey */
+    color: rgb(39, 39, 39); /* Changing text color for contrast */
+    padding: 15px;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(15, 14, 14, 0.2); /* Adding shadow */
+}
+
+button {
+    margin-top: 10px; 
+    padding: 10px; 
+    background-color: #666; /* Keeping button color */
+    color: white;
+    border: none; /* Removing border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Cursor change on hover */
+}
+
+.quantity, .remove {
+    margin: 10px 0; 
+}
+
+.checkout-button,
+.previous-order-button {
+    background-color: #636363; /* Changed to a blue shade */
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}

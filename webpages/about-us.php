@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="../css-files/main.css">
-    <link rel="stylesheet" href="../css-files/nav.css">
+<?php include_once("includes/include.php") ?>
+
 </head>
 <body>
 
 <?php include_once("includes/navbar.php") ?>
 
-  <section>
+  <main>
     <h2>About Us</h2>
 
     <div id="mission-section">
@@ -25,7 +25,8 @@
         <!-- Add more reviews as needed -->
       </div>
     </div>
-  </section>
+</main>
+<?php include_once("includes/footer.php") ?>
 
 </body>
 
