@@ -8,8 +8,8 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 // You should include database connection logic here
+$conn = new mysqli("hostname", "username", "password", "database");
 
-// Fetch products from the database (replace this with your database query)
 $products = []; // Fetch products from the database
 
 ?>
@@ -29,7 +29,7 @@ $products = []; // Fetch products from the database
 <body>
     <h2>Manage Products</h2>
 
-    <!-- Display product list -->
+    <!-- Product list -->
     <table>
         <thead>
             <tr>
@@ -58,7 +58,7 @@ $products = []; // Fetch products from the database
         </tbody>
     </table>
 
-    <!-- Add link to add a new product -->
+    
     <a href="add-product.php">Add New Product</a>
 </body>
 </html>

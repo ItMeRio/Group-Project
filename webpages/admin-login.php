@@ -8,14 +8,14 @@ if (isset($_SESSION['admin_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check login credentials (you should hash passwords in a real scenario)
+    // Check login credentials
     $username = $_POST['username'];
-    $password = $_POST['password']; // Remember to hash this in a real scenario
+    $password = $_POST['password'];
 
-    // Validate admin credentials (you should replace this with database validation)
+    // Validate admin credentials
     if ($username === 'admin' && $password === 'admin123') {
-        // Set admin session
-        $_SESSION['admin_id'] = 1; // You may use a unique identifier from your database
+        
+        $_SESSION['admin_id'] = 1;
 
         // Redirect to admin dashboard
         header("Location: admin-dashboard.php");

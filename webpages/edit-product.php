@@ -4,8 +4,6 @@ $conn = new mysqli("hostname", "username", "password", "database");
 
 session_start();
 
-// Assume you have a method to get product details by ID
-// Replace getProductDetailsById with your actual method
 function getProductDetailsById($productId) {
     global $conn;
 
@@ -15,7 +13,6 @@ function getProductDetailsById($productId) {
     // Query to retrieve product details by ID
     $sql = "SELECT * FROM products WHERE product_id = $productId";
 
-    // Execute the query
     $result = $conn->query($sql);
 
     // Check if the query was successful
@@ -23,30 +20,30 @@ function getProductDetailsById($productId) {
         // Fetch the product details as an associative array
         $productDetails = $result->fetch_assoc();
 
-        // Free the result set
+      
         $result->free_result();
 
         return $productDetails;
     } else {
-        // Handle query error (log, display an error message, etc.)
+        // Handle query error 
         echo "Error retrieving product details: " . $conn->error;
         return null;
     }
 }
 
-// Check if a product ID is provided in the URL
+
 if (isset($_GET['id'])) {
     $productId = intval($_GET['id']);
     $productDetails = getProductDetailsById($productId);
 
     if (!$productDetails) {
         echo "Product not found!";
-        // You might want to include a link to go back to the products list or do something else
+
         exit();
     }
 } else {
     echo "Product ID not provided!";
-    // You might want to include a link to go back to the products list or do something else
+
     exit();
 }
 
@@ -95,8 +92,7 @@ $conn->close();
 
         <label for="price">Price:</label>
         <input type="number" id="price" name="price" step="0.01" value="<?php echo $productDetails['price']; ?>" required>
-        <!-- Add other input fields for additional product details -->
-
+     
         <button type="submit">Update Product</button>
     </form>
 </body>

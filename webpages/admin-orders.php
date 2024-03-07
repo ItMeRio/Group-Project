@@ -8,8 +8,8 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 // You should include database connection logic here
+$conn = new mysqli("hostname", "username", "password", "database");
 
-// Fetch orders from the database (replace this with your database query)
 $orders = []; // Fetch orders from the database
 
 ?>
@@ -27,7 +27,7 @@ $orders = []; // Fetch orders from the database
 <body>
     <h2>Manage Orders</h2>
 
-    <!-- Display order list -->
+    <!-- Order list -->
     <table>
         <thead>
             <tr>

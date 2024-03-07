@@ -10,12 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $address = isset($_POST['address']) ? htmlspecialchars(trim($_POST['address'])) : '';
     $payment = isset($_POST['payment']) ? htmlspecialchars(trim($_POST['payment'])) : '';
 
-    // Validate and sanitize the input (implement your validation logic here)
-
     // Check if the basket is empty
     if (empty($_SESSION['basket'])) {
         echo "Your basket is empty. Add items before proceeding to checkout.";
-        // You might want to provide a link to go back to the products page or continue shopping.
     } else {
         // Process the order and insert order details into the database
         $insertOrderSQL = "INSERT INTO orders (customer_name, customer_address, payment_info, order_date) 
@@ -52,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Clear the basket after the order is processed
             $_SESSION['basket'] = [];
 
-            // Send email notification to the admin (as shown in the previous response)
-            $admin_email = 'admin@example.com'; // Replace with the actual admin email
+            // Send email notification to the admin
+            $admin_email = 'admin@example.com'; 
             $subject = 'New Order Notification';
             $message = "A new order has been placed. Customer: $name, Address: $address, Payment: $payment";
             $headers = 'From: webmaster@example.com' . "\r\n" .

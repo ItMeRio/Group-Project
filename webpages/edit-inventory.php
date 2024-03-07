@@ -1,15 +1,12 @@
 <?php
-// Include your database connection code here
-// $conn = new mysqli("hostname", "username", "password", "database");
+//Include your database connection code here
+$conn = new mysqli("hostname", "username", "password", "database");
 
 session_start();
 
-// Assume you have a method to get inventory item details by ID
-// Replace getInventoryDetailsById with your actual method
 function getInventoryDetailsById($itemId) {
     global $conn;
 
-    // Escape the item ID to prevent SQL injection
     $itemId = mysqli_real_escape_string($conn, $itemId);
 
     // Query to retrieve inventory details by ID
@@ -23,30 +20,29 @@ function getInventoryDetailsById($itemId) {
         // Fetch the inventory details as an associative array
         $inventoryDetails = $result->fetch_assoc();
 
-        // Free the result set
         $result->free_result();
 
         return $inventoryDetails;
     } else {
-        // Handle query error (log, display an error message, etc.)
+        // Handle query error
         echo "Error retrieving inventory details: " . $conn->error;
         return null;
     }
 }
 
-// Check if an inventory item ID is provided in the URL
+
 if (isset($_GET['id'])) {
     $inventoryId = intval($_GET['id']);
     $inventoryDetails = getInventoryDetailsById($inventoryId);
 
     if (!$inventoryDetails) {
         echo "Inventory item not found!";
-        // You might want to include a link to go back to the inventory list or do something else
+     
         exit();
     }
 } else {
     echo "Inventory item ID not provided!";
-    // You might want to include a link to go back to the inventory list or do something else
+  
     exit();
 }
 
@@ -55,9 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updatedItemName = isset($_POST['item_name']) ? htmlspecialchars(trim($_POST['item_name'])) : '';
     $updatedItemDescription = isset($_POST['item_description']) ? htmlspecialchars(trim($_POST['item_description'])) : '';
     $updatedItemQuantity = isset($_POST['item_quantity']) ? intval($_POST['item_quantity']) : 0;
-    // Add other fields as needed
-
-    // Validate and sanitize the input (implement your validation logic here)
+  
 
     // Update the inventory item details in the database
     $updateInventorySQL = "UPDATE inventory 
@@ -96,7 +90,7 @@ $conn->close();
 
         <label for="item_quantity">Item Quantity:</label>
         <input type="number" id="item_quantity" name="item_quantity" value="<?php echo $inventoryDetails['item_quantity']; ?>" required>
-        <!-- Add other input fields for additional inventory item details -->
+        
 
         <button type="submit">Update Inventory Item</button>
     </form>

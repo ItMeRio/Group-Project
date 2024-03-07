@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle form submission
     $order_id = $_POST['order_id']; // Replace with the actual name of your order ID field
 
-    // Fetch order details from the database (replace this with your actual query)
+    // Fetch order details from the database
     $sql = "SELECT * FROM orders WHERE order_id = $order_id";
     $result = $conn->query($sql);
 
@@ -50,13 +50,9 @@ $conn->close();
         <p style="color: red;"><?php echo $error_message; ?></p>
     <?php else : ?>
         <form method="post">
-            <!-- Display order details for editing -->
+            
             <label for="order_id">Order ID:</label>
             <input type="text" id="order_id" name="order_id" value="<?php echo $order['order_id']; ?>" readonly>
-
-            <!-- Add more fields for editing order details based on your database structure -->
-            <!-- Example: <label for="new_status">New Status:</label>
-                       <input type="text" id="new_status" name="new_status" value="<?php echo $order['status']; ?>"> -->
 
             <button type="submit">Save Changes</button>
         </form>

@@ -1,5 +1,5 @@
 <?php
-// Delete product logic here (delete from database)
+// Delete product logic here 
 function deleteProduct($id) {
   global $conn;
 
@@ -21,7 +21,6 @@ function deleteProduct($id) {
 
     <p>Are you sure you want to delete this product?</p>
 
-    <!-- Add confirmation button -->
     <form method="post">
         <button type="submit">Yes, Delete Product</button>
     </form>

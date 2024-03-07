@@ -1,5 +1,4 @@
 <?php
-// Delete customer logic here (delete from database)
 function deleteCustomer($id) {
   global $conn;
 
@@ -21,7 +20,6 @@ function deleteCustomer($id) {
 
     <p>Are you sure you want to delete this customer?</p>
 
-    <!-- Add confirmation button -->
     <form method="post">
         <button type="submit">Yes, Delete Customer</button>
     </form>

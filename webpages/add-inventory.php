@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $itemDescription = isset($_POST['item_description']) ? htmlspecialchars(trim($_POST['item_description'])) : '';
     $itemQuantity = isset($_POST['item_quantity']) ? intval($_POST['item_quantity']) : 0;
 
-    // Validate and sanitize the input (implement your validation logic here)
 
     // Insert the inventory item into the inventory table
     $insertInventorySQL = "INSERT INTO inventory (item_name, item_description, item_quantity) 

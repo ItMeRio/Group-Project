@@ -90,7 +90,7 @@ $conn->close();
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" value="<?php echo $customerDetails['email']; ?>" required>
-        <!-- Add other input fields for additional customer details -->
+        
 
         <button type="submit">Update Customer</button>
     </form>

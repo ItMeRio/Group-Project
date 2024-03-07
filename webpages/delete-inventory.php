@@ -16,8 +16,7 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Handle form submission
-    // Retrieve the item_id from the form (replace with your actual input name)
+    // Retrieve the item_id from the form
     $item_id = $_POST['item_id'];
 
     // Delete the inventory item from the database
@@ -48,10 +47,8 @@ $conn->close();
 
     <p>Are you sure you want to delete this inventory item?</p>
 
-    <!-- Display item_id for confirmation (replace with actual item details) -->
     <p>Item ID: <?php echo $_GET['item_id']; ?></p>
 
-    <!-- Add confirmation button -->
     <form method="post">
         <input type="hidden" name="item_id" value="<?php echo $_GET['item_id']; ?>">
         <button type="submit">Yes, Delete Inventory Item</button>

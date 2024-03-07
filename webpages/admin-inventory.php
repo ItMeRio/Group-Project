@@ -8,8 +8,8 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 // You should include database connection logic here
+$conn = new mysqli("hostname", "username", "password", "database");
 
-// Fetch inventory from the database (replace this with your database query)
 $inventory = []; // Fetch inventory from the database
 
 ?>
@@ -29,7 +29,7 @@ $inventory = []; // Fetch inventory from the database
 <body>
     <h2>Inventory Management</h2>
 
-    <!-- Display inventory list -->
+    
     <table>
         <thead>
             <tr>
@@ -56,7 +56,7 @@ $inventory = []; // Fetch inventory from the database
         </tbody>
     </table>
 
-    <!-- Add link to add a new inventory item -->
+    
     <a href="add-inventory.php">Add New Inventory Item</a>
 </body>
 </html>

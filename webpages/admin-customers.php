@@ -7,9 +7,9 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-// You should include database connection logic here
+//include database connection logic here
+$conn = new mysqli("hostname", "username", "password", "database");
 
-// Fetch customers from the database (replace this with your database query)
 $customers = []; // Fetch customers from the database
 
 ?>
@@ -29,7 +29,7 @@ $customers = []; // Fetch customers from the database
 <body>
     <h2>Manage Customers</h2>
 
-    <!-- Display customer list -->
+    <!-- Customer list -->
     <table>
         <thead>
             <tr>
@@ -56,7 +56,6 @@ $customers = []; // Fetch customers from the database
         </tbody>
     </table>
 
-    <!-- Add link to add a new customer -->
     <a href="add-customer.php">Add New Customer</a>
 </body>
 </html>

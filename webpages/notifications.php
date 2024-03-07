@@ -1,13 +1,15 @@
 <?php
 // Include database connection code here (e.g., $conn)
+$conn = new mysqli("hostname", "username", "password", "database");
 
 // Fetch email notifications from the database
-$sql = "SELECT * FROM notifications ORDER BY created_at DESC"; // Assuming you have a 'notifications' table
+$sql = "SELECT * FROM notifications ORDER BY created_at DESC"; 
 $result = $conn->query($sql);
 
 $notifications = ($result->num_rows > 0) ? $result->fetch_all(MYSQLI_ASSOC) : array();
 
-// Close the database connection (e.g., $conn->close())
+// Close the database connection
+$conn->close()
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +18,7 @@ $notifications = ($result->num_rows > 0) ? $result->fetch_all(MYSQLI_ASSOC) : ar
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Notifications</title>
-    <!-- Include any additional styles or scripts if necessary -->
+    
 </head>
 <body>
 
@@ -36,7 +38,7 @@ $notifications = ($result->num_rows > 0) ? $result->fetch_all(MYSQLI_ASSOC) : ar
     <p>No email notifications.</p>
 <?php endif; ?>
 
-<!-- Add any additional content or navigation as needed -->
+
 
 </body>
 </html>

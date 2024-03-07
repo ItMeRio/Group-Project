@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $productPrice = isset($_POST['product_price']) ? floatval($_POST['product_price']) : 0.0;
     $productStock = isset($_POST['product_stock']) ? intval($_POST['product_stock']) : 0;
 
-    // Validate and sanitize the input (implement your validation logic here)
 
     // Insert the product into the products table
     $insertProductSQL = "INSERT INTO products (name, description, price, stock) 

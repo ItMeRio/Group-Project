@@ -34,9 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <h2>Add New Customer</h2>
 
-    <!-- Add customer form -->
+    
     <form method="post" action="add_customer.php">
-        <!-- Add input fields for customer details (username, email, password, etc.) -->
+        
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
 
-        <!-- Add more input fields as needed (e.g., name, address, etc.) -->
+        
 
         <button type="submit">Add Customer</button>
     </form>
