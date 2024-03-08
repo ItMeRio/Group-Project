@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/css-files/contact.css">
-    <link rel="stylesheet" href="/css-files/registration.css">
+<?php include_once("includes/include.php") ?>
+<link rel="stylesheet" href="../css/contact.css">
+
 </head>
-<nav>
-  <ul>
-      <li><a href="home page.html">Home</a></li>
-      <li><a href="product -page.html">Products</a></li>
-      <li><a href="contact-page.html">Contact Us</a></li>
-      <li><a href="about us page.html">About Us</a></li>
-      <li><a href="registration.html">Registration</a></li>
-      <li><a href="sign-in page.html">Sign in</a> </li>
-      <li><a href="basket-page.html">Basket</a></li>
-  </ul>
-</nav>
+
 <body>
+<?php include_once("includes/navbar.php") ?>
 
 
-  <section class="main-content">
+  <main>
     <h1>Contact Us!</h1>
 
     <div class="contact-container">
@@ -45,8 +37,8 @@
         <input type="submit" value="Submit">
       </form>
     </div>
-  </section>
-
+</main>
+<?php include_once("includes/footer.php") ?>
 </body>
 
 </html>

@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/css-files/baskets.css">
-    <link rel="stylesheet" href="/css-files/registration.css">
-</head>
-<nav>
-    <ul>
-        <li><a href="home page.html">Home</a></li>
-        <li><a href="product -page.html">Products</a></li>
-        <li><a href="contact-page.html">Contact Us</a></li>
-        <li><a href="about us page.html">About Us</a></li>
-        <li><a href="registration.html">Registration</a></li>
-        <li><a href="sign-in page.html">Sign in</a> </li>
-        <li><a href="basket-page.html">Basket</a></li>
-    </ul>
-  </nav>
-    
-<body>
+<?php include_once("includes/include.php") ?>
+<link rel="stylesheet" href="../css/checkout.css">
 
+
+</head>
+
+<body>
+<?php include_once("includes/navbar.php") ?>
+
+<main>
 <div class="main-content">
 
     <h1>Checkout</h1>
@@ -48,6 +41,8 @@
     </div>
 
 </div>
+</main>
+<?php include_once("includes/footer.php") ?>
 
 </body>
 </html>
