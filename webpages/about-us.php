@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include_once("includes/include.php") ?>
-
+  <?php include_once("includes/include.php") ?>
 </head>
 <body>
-
-<?php include_once("includes/navbar.php") ?>
-
+  <?php include_once("includes/navbar.php") ?>
   <main>
     <h2>About Us</h2>
 
@@ -17,17 +14,14 @@
     </div>
 
     <div id="review-section">
-      <h2>Customer Reviews</h2>
-      <!-- Display customer reviews here -->
-      <div id="reviews">
-        <p>★★★★★ Purchased shoes from here, amazing quality!</p>
-        <p>★★★★★ The shoes I bought were exactly as described, very satisfied!</p>
-        <!-- Add more reviews as needed -->
-      </div>
+      <h2>Leave a Review</h2>
+      <form id="review-form" action="submit_review.php" method="post">
+        <label for="review">Your Review:</label><br>
+        <textarea id="review" name="review" rows="4" cols="50"></textarea><br>
+        <input type="submit" value="Submit">
+      </form>
     </div>
-</main>
-<?php include_once("includes/footer.php") ?>
-
+  </main>
+  <?php include_once("includes/footer.php") ?>
 </body>
-
 </html>
