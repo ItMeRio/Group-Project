@@ -39,15 +39,15 @@
       font-weight: bold;
     }
 
-    .product input[type="number"],
-    .product input[type="text"] {
-      width: 50px; /* Adjust input width */
+    .product input[type="number"] {
+      width: 50px;
       padding: 5px;
       margin-left: 10px;
     }
 
-    .total-price-input {
-      width: 80px; /* Adjust input width */
+    .product .price-input {
+      width: 60px;
+      padding: 5px;
     }
 
     .btn {
@@ -67,15 +67,13 @@
     .address-box,
     .promo-code-box,
     .contact-box,
-    .shipping-button,
-    .total-amount-box {
+    .shipping-button {
       margin-top: 20px;
     }
 
     .address-box label,
     .promo-code-box label,
-    .contact-box label,
-    .total-amount-box label {
+    .contact-box label {
       font-weight: bold;
       display: block;
       margin-bottom: 5px;
@@ -84,8 +82,7 @@
     .address-box input[type="text"],
     .address-box input[type="number"],
     .promo-code-box input[type="text"],
-    .contact-box input[type="email"],
-    .total-amount-box input[type="text"] {
+    .contact-box input[type="email"] {
       width: calc(100% - 20px); /* Adjusted width to account for padding */
       padding: 5px;
       margin-bottom: 10px;
@@ -136,7 +133,8 @@
             <img src="womens_shoes.jpg" alt="Women's Shoes">
             <label for="womens_shoes">Quantity:</label>
             <input type="number" id="womens_shoes" name="womens_shoes" min="0" value="0">
-            <input class="total-price-input" type="text" id="womens_shoes_price" name="womens_shoes_price" placeholder="Price">
+            <label for="womens_shoes_price">Price:</label>
+            <input type="number" id="womens_shoes_price" name="womens_shoes_price" class="price-input" placeholder="$">
             <button class="btn">Add to Cart</button>
           </div>
         </div>
@@ -146,7 +144,8 @@
             <img src="mens_shoes.jpg" alt="Men's Shoes">
             <label for="mens_shoes">Quantity:</label>
             <input type="number" id="mens_shoes" name="mens_shoes" min="0" value="0">
-            <input class="total-price-input" type="text" id="mens_shoes_price" name="mens_shoes_price" placeholder="Price">
+            <label for="mens_shoes_price">Price:</label>
+            <input type="number" id="mens_shoes_price" name="mens_shoes_price" class="price-input" placeholder="$">
             <button class="btn">Add to Cart</button>
           </div>
         </div>
@@ -173,4 +172,18 @@
           <h2>Contact Information</h2>
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" placeholder="Enter your email address">
-        </div
+        </div>
+        <div class="promo-code-box">
+          <h2>Apply Promo Code</h2>
+          <input type="text" id="promo_code" name="promo_code" placeholder="Enter promo code">
+          <button class="btn">Apply</button>
+        </div>
+        <div class="shipping-button">
+          <button class="btn">Continue to Shipping</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <?php include_once("includes/footer.php") ?>
+</body>
+</html>
