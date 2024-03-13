@@ -24,20 +24,29 @@
   <main>
     <div class="category-boxes">
       <div class="category-box">
+        <a href="products-women.php">
         <img src = "womensclothing.jpg" width="100%" height="300px"/>
+  </a>
       </div>
       <div class="category-box">
+      <a href="products-men.php">
         <img src = "mensclothing.jpg" width="100%" height="300px"/>
+  </a>
       </div>
       <div class="category-box">
+      <a href="products-kids.php">
         <img src = "kidsclothing.jpg" width="100%" height="300px"/>
+  </a>
       </div>
       <div class="category-box">
+      <a href="products-accessories.php">
       <img src = "accessories.jpg" width="100%" height="300px"/>
+  </a>
       </div>
       <div class="category-box">
-        <h2>Offers</h2>
+      <a href="products-offers.php">
         <img src = "offers.jpg" width="100%" height="300px"/>
+  </a>
       </div>
     </div>
   </main>
