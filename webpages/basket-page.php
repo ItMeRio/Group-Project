@@ -22,32 +22,38 @@
       border: 1px solid #ccc; /* Adding border around the product box */
       padding: 10px; /* Adding padding inside the product box */
       margin-bottom: 20px; /* Adjusting margin to separate product boxes */
+      
     }
 
     .product {
       margin-bottom: 20px;
       display: flex;
-      align-items: center;
+      width: 100%;
+      height: 80%;
+      text-align: center;
     }
 
     .product img {
       width: 100px;
       margin-right: 20px;
+      margin-bottom: 25%;
     }
 
     .product label {
       font-weight: bold;
+     margin-top: 20px;
     }
 
     .product input[type="number"] {
-      width: 50px;
+      width: 20%;
       padding: 5px;
-      margin-left: 10px;
+      
     }
 
     .product .price-input {
       width: 60px;
       padding: 5px;
+      
     }
 
     .btn {
@@ -57,7 +63,7 @@
       padding: 10px 20px;
       border-radius: 4px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 30px;
     }
 
     .btn:hover {
@@ -127,36 +133,28 @@
   <main>
     <div class="container">
       <div class="basket-left">
-        <div class="product-box"> <!-- Adding box around the products -->
-          <h2>Women's Shoes</h2>
+       
+          
           <div class="product">
-            <img src="womens_shoes.jpg" alt="Women's Shoes">
+            <img src="womens_shoes.jpg" >
             <label for="womens_shoes">Quantity:</label>
             <input type="number" id="womens_shoes" name="womens_shoes" min="0" value="0">
             <label for="womens_shoes_price">Price:</label>
-            <input type="number" id="womens_shoes_price" name="womens_shoes_price" class="price-input" placeholder="$">
+            <h6> 50£ </h6> 
             <button class="btn">Add to Cart</button>
           </div>
-        </div>
-        <div class="product-box"> <!-- Adding box around the products -->
-          <h2>Men's Shoes</h2>
-          <div class="product">
-            <img src="mens_shoes.jpg" alt="Men's Shoes">
-            <label for="mens_shoes">Quantity:</label>
-            <input type="number" id="mens_shoes" name="mens_shoes" min="0" value="0">
-            <label for="mens_shoes_price">Price:</label>
-            <input type="number" id="mens_shoes_price" name="mens_shoes_price" class="price-input" placeholder="$">
-            <button class="btn">Add to Cart</button>
-          </div>
-        </div>
+        
+        
+         
+        
       </div>
       <div class="basket-right">
         <div class="pay-with">
           <h2>Pay With</h2>
           <div class="payment-icons">
-            <img src="paypal_icon.png" alt="PayPal">
-            <img src="mastercard_icon.png" alt="Mastercard">
-            <img src="visa_icon.png" alt="Visa">
+          
+            <img src="mastercard.png" alt="mastercard">
+            <img src="visa.png" alt="Visa">
           </div>
         </div>
         <div class="address-box">
