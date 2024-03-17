@@ -41,7 +41,6 @@
   </a>
       </div>
       <div class="category-box">
-        <h2>Offers</h2>
       <a href="products-offers.php">
         <img src = "offers.jpg" width="100%" height="300px"/>
   </a>
