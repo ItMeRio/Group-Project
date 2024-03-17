@@ -23,10 +23,15 @@
       <div class="category-box">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       
 
         <img src = "womensclothing.jpg" width="100%" height="300px"/>
+=======
+        <h2>Women's Clothing</h2>
+        <!-- Add content for women's clothing category -->
+>>>>>>> parent of 093ade6 (home page)
 =======
         <h2>Women's Clothing</h2>
         <!-- Add content for women's clothing category -->
@@ -52,8 +57,12 @@
         <h2>Offers</h2>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <img src = "offers.jpg" width="100%" height="300px"/>
 
+=======
+        <!-- Add content for offers category -->
+>>>>>>> parent of 093ade6 (home page)
 =======
         <!-- Add content for offers category -->
 >>>>>>> parent of 093ade6 (home page)
