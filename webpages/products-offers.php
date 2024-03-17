@@ -1,25 +1,16 @@
+
 <?php
 require_once('connect.php');
-
-if(isset($_POST['add_to_cart'])){
-    $product_name = $_POST['product_name'];
-    $price = $_POST['price'];
-    $brand = $_POST['brand'];
-    $product_ID = $_POST['product_ID'];
-    $img = $_POST['product_img'];
-    $product_quantity = 1;
-
-}
 
 if (isset($_GET['search'])) {
     $search = mysqli_real_escape_string($conn, $_GET['search']);
 
     // Modify the SQL query to include a WHERE clause for searching
-    $sql = "SELECT products_ID, product_name, price, img, color, brand, categories, section FROM products WHERE product_name LIKE '%$search%'";
+    $sql = "SELECT products_ID, product_name, price, img, color, brand, categories, section FROM products WHERE product_name LIKE '%$search%' AND categories = 'Offers'";
 
 } else {
     // Default query without search filter
-    $sql = "SELECT products_ID, product_name, price, img, color, brand, categories, section FROM products";
+    $sql = "SELECT products_ID, product_name, price, img, color, brand, categories, section FROM products WHERE categories = 'Offers'";
 }
 
 $result_products = $conn->query($sql); // Store the result in a different variable
@@ -92,25 +83,7 @@ $result_products = $conn->query($sql); // Store the result in a different variab
                         <?php } ?>
                     </ul>
 
-                    <h6 class="text-info">Select Category</h6>
-                    <ul class="list-group">
-                        <?php
-                        $sql_categories = "SELECT DISTINCT categories FROM products ORDER BY categories";
-                        $result_categories = $conn->query($sql_categories);
-
-                        while ($row = $result_categories->fetch_assoc()) {
-                            ?>
-                            <li class="list-group-item">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input categories_check"
-                                            value="<?= $row['categories']; ?>" id="categories<?= $row['categories']; ?>">
-                                        <?= $row['categories']; ?>
-                                    </label>
-                                </div>
-                            </li>
-                        <?php } ?>
-                    </ul>
+                    
 
                 </div>
                 <div class="col-lg-9">
@@ -130,12 +103,8 @@ $result_products = $conn->query($sql); // Store the result in a different variab
                             echo '<p class="details">' . $row["brand"] . ', ' . $row["color"] . '</p>';
                             echo '<p>£' . $row["price"] . '</p>';
                             echo '<form method="POST" action="insert_order_item.php">';
-                            echo '<input type="hidden" name="product_ID" >';
-                            echo '<input type="hidden" name="price" >';
-                            echo '<input type="hidden" name="product_name">';
-                            echo '<input type="hidden" name="brand" >';
-                            echo '<input type="hidden" name="product_img" >';
-                            echo '<input value = "Add to Cart" type = "submit" class="add-to-cart" name= "add_to_cart" ></input>';
+                            echo '<input type="hidden" name="product_ID" value="' . $row["products_ID"] . '">';
+                            echo '<button class="add-to-cart" data-product-id=" ' . $row["products_ID"] . ' " data-quantity="1">Add to Cart</button>';
                             echo '</form>';
                             echo '</div>';
 
@@ -170,9 +139,7 @@ $result_products = $conn->query($sql); // Store the result in a different variab
                     return $(this).val();
                 }).get();
 
-                var selectedCategories = $('.categories_check:checked').map(function () {
-                    return $(this).val();
-                }).get();
+               
 
                 // Hide all products
                 $('.product').hide();
@@ -181,11 +148,10 @@ $result_products = $conn->query($sql); // Store the result in a different variab
                 $('.product').each(function () {
                     var brand = $(this).data('brand');
                     var color = $(this).data('color');
-                    var categories = $(this).data('categories');
+                   
 
                     if ((selectedBrands.length === 0 || selectedBrands.includes(brand)) &&
-                        (selectedColors.length === 0 || selectedColors.includes(color)) &&
-                        (selectedCategories.length === 0 || selectedCategories.includes(categories))) {
+                        (selectedColors.length === 0 || selectedColors.includes(color))) {
                         $(this).show();
                     }
                 });
@@ -193,7 +159,7 @@ $result_products = $conn->query($sql); // Store the result in a different variab
             }
 
             // Call the filter function on checkbox change
-            $('.product_check, .color_check, .categories_check').change(function () {
+            $('.product_check, .color_check').change(function () {
                 filterProducts();
             });
 
@@ -240,4 +206,3 @@ $result_products = $conn->query($sql); // Store the result in a different variab
 </body>
 
 </html>
-
