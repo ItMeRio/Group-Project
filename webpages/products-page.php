@@ -240,4 +240,3 @@ $result_products = $conn->query($sql); // Store the result in a different variab
 </body>
 
 </html>
-
