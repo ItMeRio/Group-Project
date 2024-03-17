@@ -21,24 +21,36 @@
   <main>
     <div class="category-boxes">
       <div class="category-box">
+<<<<<<< HEAD
 
       
 
         <img src = "womensclothing.jpg" width="100%" height="300px"/>
+=======
+        <h2>Women's Clothing</h2>
+        <!-- Add content for women's clothing category -->
+>>>>>>> parent of 093ade6 (home page)
       </div>
       <div class="category-box">
-        <img src = "mensclothing.jpg" width="100%" height="300px"/>
+        <h2>Men's Clothing</h2>
+        <!-- Add content for men's clothing category -->
       </div>
       <div class="category-box">
-        <img src = "kidsclothing.jpg" width="100%" height="300px"/>
+        <h2>Kids' Clothing</h2>
+        <!-- Add content for kids' clothing category -->
       </div>
       <div class="category-box">
-      <img src = "accessories.jpg" width="100%" height="300px"/>
+        <h2>Accessories</h2>
+        <!-- Add content for accessories category -->
       </div>
       <div class="category-box">
         <h2>Offers</h2>
+<<<<<<< HEAD
         <img src = "offers.jpg" width="100%" height="300px"/>
 
+=======
+        <!-- Add content for offers category -->
+>>>>>>> parent of 093ade6 (home page)
       </div>
     </div>
   </main>
