@@ -21,7 +21,6 @@
   <main>
     <div class="category-boxes">
       <div class="category-box">
-<<<<<<< HEAD
         <a href="products-women.php">
         <img src = "womensclothing.jpg" width="100%" height="300px"/>
   </a>
@@ -45,26 +44,6 @@
       <a href="products-offers.php">
         <img src = "offers.jpg" width="100%" height="300px"/>
   </a>
-=======
-        <h2>Women's Clothing</h2>
-        <!-- Add content for women's clothing category -->
-      </div>
-      <div class="category-box">
-        <h2>Men's Clothing</h2>
-        <!-- Add content for men's clothing category -->
-      </div>
-      <div class="category-box">
-        <h2>Kids' Clothing</h2>
-        <!-- Add content for kids' clothing category -->
-      </div>
-      <div class="category-box">
-        <h2>Accessories</h2>
-        <!-- Add content for accessories category -->
-      </div>
-      <div class="category-box">
-        <h2>Offers</h2>
-        <!-- Add content for offers category -->
->>>>>>> parent of 093ade6 (home page)
       </div>
     </div>
   </main>
