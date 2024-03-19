@@ -1,12 +1,14 @@
+<?php 
+include("connect.php")
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
   <?php include_once("includes/include.php") ?>
   <style>
-    .container {
-      display: flex;
-      align-items: flex-start; /* Align items at the start of the container */
-    }
+    
 
     .basket-left {
       flex: 1;
@@ -16,6 +18,7 @@
     .basket-right {
       flex: 1;
       padding-left: 20px;
+
     }
 
     .product-box {
@@ -30,6 +33,7 @@
       display: flex;
       width: 100%;
       height: 80%;
+      background-color: white;
       text-align: center;
     }
 
@@ -126,6 +130,30 @@
     .payment-icons img:last-child {
       margin-right: 0;
     }
+
+    th, td {
+  padding: 20px;
+  color: black;
+}
+
+.table_bottom{
+  color: black;
+}
+
+
+
+
+.quantity_box{
+  color:black;
+  padding:15px;
+}
+
+.bottom_btn{
+  color:black;
+  background-color: black;
+
+}
+
   </style>
 </head>
 <body>
@@ -136,13 +164,67 @@
        
           
           <div class="product">
-            <img src="womens_shoes.jpg" >
-            <label for="womens_shoes">Quantity:</label>
-            <input type="number" id="womens_shoes" name="womens_shoes" min="0" value="0">
-            <label for="womens_shoes_price">Price:</label>
-            <h6> 50£ </h6> 
-            <button class="btn">Add to Cart</button>
+            <h1>My Cart</h1>
+            <table>
+              <?php 
+              $select_cart_products = mysqli_query($conn, "Select * from `cart`");
+              $num = 1;
+              if(mysqli_num_rows($select_cart_products)>0){
+                echo "
+                <thead>
+                <tr>
+                <th>SI No</th>
+                <th> Name</th>
+                <th> Image</th>
+                <th> Price</th>
+                <th> Quantity</th>
+                <th>Total Price</th>
+                <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>";
+              
+              while($fetch_cart_products = mysqli_fetch_assoc($select_cart_products)) {
+                echo '<tr>';
+                echo '<td>' . $num . '</td>'; // Assuming this is the serial number of the product
+                echo '<td>' . $fetch_cart_products['name'] . '</td>'; // Assuming 'name' is the column name for product name
+                echo '<td><img src="data:image/jpeg;base64,' . $fetch_cart_products['image'] . '"></td>'; // Displaying the image
+                echo '<td>' . $fetch_cart_products['price'] . '</td>'; // Assuming 'price' is the column name for product price
+                echo '<td>';
+                echo '<form action = "" method = "post">';
+                echo '<div class="quantity_box">';
+                echo '<input type="number" class="update" min="1" value="' . $fetch_cart_products['quantity'] . '">';
+                echo '<input type="submit" class="update_quantity" value="Update" style = "margin:10px;">';
+                echo '</div>';
+                echo '</form>';
+                echo '</td>';
+                echo '<td></td>'; // Assuming 'total_price' is the column name for total price
+                echo '<td>';
+                echo '<a href="#"><i class="fa fa-trash"></i> Remove</a>';
+                echo '</td>';
+                echo '</tr>';
+                $num++;
+            }
+            
+            
+              }else{
+                echo "No products";
+              }
+
+              ?>
+              
+              
+        
+              </tbody>
+            </table>
+            <div class="table_bottom">
+              <a href ="products-page.php" class = "bottom_btn" style="color: black; background-color: white;">Continue Shopping</a>
+              <h3 class="bottom_btn"></h3>Basket total: <span>242</span>
+            </div>
           </div>
+          <a href= "" class="delete_all_btn">
+          <i class= "fa fa-trash"></i>Delete all
+          </a>
         
         
          
@@ -178,6 +260,7 @@
         </div>
         <div class="shipping-button">
           <button class="btn">Continue to Shipping</button>
+    
         </div>
       </div>
     </div>

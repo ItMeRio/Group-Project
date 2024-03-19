@@ -3,7 +3,7 @@ $review = $_POST['review'];
 $rating = $_POST['rating'];
 $date = $_POST['date'];
 
-$servername = "127.0.0.1:3308";
+$servername = "localhost";
 $username = "root";
 $password = "";
 $db = "teamproject";

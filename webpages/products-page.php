@@ -4,7 +4,6 @@ require('connect.php');
 if(isset($_POST['add_to_cart'])){
     $product_name = $_POST['product_name'];
     $price = $_POST['price'];
-    $brand = $_POST['brand'];
     $img = $_POST['product_img'];
     $product_quantity = 1;
 
@@ -12,7 +11,7 @@ if(isset($_POST['add_to_cart'])){
     if(mysqli_num_rows($select_cart)>0){
         $display_message[] = "Product already added to cart!";
     }else{
-        $insert_products = mysqli_query($conn, "INSERT INTO cart (name, price, brand, image, quantity) VALUES ('$product_name', '$price', '$brand', '$img', $product_quantity)");
+        $insert_products = mysqli_query($conn, "INSERT INTO cart (name, price, image, quantity) VALUES ('$product_name', '$price', '$img', $product_quantity)");
         $display_message[] = "Product added to cart!";
     }   
 
