@@ -187,7 +187,6 @@ CREATE TABLE cart (
     `name` VARCHAR(255) NOT NULL,
     `price` DECIMAL(10, 2) NOT NULL,
     `image` blob,
-    `brand` VARCHAR(255),
     `quantity` INT NOT NULL
 );
 
