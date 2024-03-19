@@ -1,13 +1,26 @@
 <?php
-require_once('connect.php');
+require('connect.php');
 
 if(isset($_POST['add_to_cart'])){
     $product_name = $_POST['product_name'];
     $price = $_POST['price'];
     $brand = $_POST['brand'];
-    $product_ID = $_POST['product_ID'];
     $img = $_POST['product_img'];
     $product_quantity = 1;
+
+    $select_cart = mysqli_query($conn, "Select * from `cart` where name = '$product_name'");
+    if(mysqli_num_rows($select_cart)>0){
+        $display_message[] = "Product already added to cart!";
+    }else{
+        $insert_products = mysqli_query($conn, "INSERT INTO cart (name, price, brand, image, quantity) VALUES ('$product_name', '$price', '$brand', '$img', $product_quantity)");
+        $display_message[] = "Product added to cart!";
+    }   
+
+       
+    
+
+    
+
 
 }
 
@@ -37,6 +50,9 @@ $result_products = $conn->query($sql); // Store the result in a different variab
 <body>
 
     <?php include_once("includes/navbar.php") ?>
+    
+
+
 
     <main>
 
@@ -46,11 +62,13 @@ $result_products = $conn->query($sql); // Store the result in a different variab
                 <button type="submit" id="search-btn">Search</button>
             </form>
         </div>
+       
 
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
                     <h5>Filter Products</h5>
+                    
                     <hr>
                     <h6 class="text-info">Select Brand</h6>
                     <ul class="list-group">
@@ -115,42 +133,47 @@ $result_products = $conn->query($sql); // Store the result in a different variab
                 </div>
                 <div class="col-lg-9">
 
-                    <section>
-                        <h2>Featured Products</h2>
-                        <?php
-                        echo '<div id="product-container">'; // Start the container outside the loop
-                        
-                        $counter = 0;
+                <section>
+    <h2>Featured Products</h2>
+    <?php
+    if(isset($display_message)){
+        foreach($display_message as $display_message){
+        echo "<div class='display_message'>
+        <span>$display_message</span>
+        <i class = 'fas fa-times' onClick='this.parentElement.style.display=`none`'; ></i>
+        </div>";
+        }
+    }
+    
+    ?>
+    <div id="product-container">
+        <?php
+        $select_products = mysqli_query($conn, "SELECT * FROM `products`");
+        if(mysqli_num_rows($select_products) > 0) {
+            while($fetch_product = mysqli_fetch_assoc($select_products)) {
+                // Product inside a row
+                echo '<div class="product" data-brand="' . $fetch_product["brand"] . '" data-color="' . $fetch_product["color"] . '" data-categories="' . $fetch_product["categories"] . '">';
+                echo '<img src="data:image/jpeg;base64,' . base64_encode($fetch_product['img']) . '"/>';
+                echo '<h5 class="name">' . $fetch_product["product_name"] . '</h5>';
+                echo '<p class="details">' . $fetch_product["brand"] . ', ' . $fetch_product["color"] . '</p>';
+                echo '<p>£' . $fetch_product["price"] . '</p>';
+                echo '<form method="POST">';
+                echo '<input type="hidden" name="product_ID">';
+                echo '<input type="hidden" name="price" value="' . $fetch_product['price'] . '">';
+                echo '<input type="hidden" name="product_name" value="' . $fetch_product['product_name'] . '">';
+                echo '<input type="hidden" name="brand" value="' . $fetch_product['brand'] . '">';
+                echo '<input type="hidden" name="product_img" value="' . base64_encode($fetch_product['img']) . '">';
+                echo '<input value="Add to Cart" type="submit" class="add-to-cart" name="add_to_cart">';
+                echo '</form>';
+                echo '</div>';
+            }
+        } else {
+            echo "No products";
+        }
+        ?>
+    </div>
+</section>
 
-                        while ($row = mysqli_fetch_assoc($result_products)) {
-                            // Product inside a row
-                            echo '<div class="product" data-brand="' . $row["brand"] . '" data-color="' . $row["color"] . '" data-categories="' . $row["categories"] . '">';
-                            echo '<img src="data:image/jpeg;base64,' . base64_encode($row['img']) . '"/>';
-                            echo '<h5 class="name">' . $row["product_name"] . '</h5>';
-                            echo '<p class="details">' . $row["brand"] . ', ' . $row["color"] . '</p>';
-                            echo '<p>£' . $row["price"] . '</p>';
-                            echo '<form method="POST" action="insert_order_item.php">';
-                            echo '<input type="hidden" name="product_ID" >';
-                            echo '<input type="hidden" name="price" >';
-                            echo '<input type="hidden" name="product_name">';
-                            echo '<input type="hidden" name="brand" >';
-                            echo '<input type="hidden" name="product_img" >';
-                            echo '<input value = "Add to Cart" type = "submit" class="add-to-cart" name= "add_to_cart" ></input>';
-                            echo '</form>';
-                            echo '</div>';
-
-                            $counter++;
-
-                            // Check if three products are displayed, then start a new row
-                            if ($counter % 3 == 0) {
-                                echo '</div><div id="product-container">'; // Close and reopen the container
-                            }
-                        }
-
-                        echo '</div>'; // Close the container after the loop
-                        ?>
-
-                    </section>
                 </div>
             </div>
         </div>
@@ -201,39 +224,7 @@ $result_products = $conn->query($sql); // Store the result in a different variab
             filterProducts();
         });
 
-        $(document).ready(function () {
-            $(document).on('click', '.add-to-cart', function () {
-                var products_ID = $(this).data('product_ID');
-                var quantity = $(this).data('quantity');
-
-                console.log('Adding to cart:', products_ID, 'Quantity:', quantity);
-
-                // Increment the quantity
-                quantity++;
-
-                // Update the data-quantity attribute
-                $(this).data('quantity', quantity);
-
-                // Send an AJAX request to update the quantity on the server
-                $.ajax({
-                    type: 'POST',
-                    url: 'update_quantity.php', // Replace with the actual URL of your server-side script
-                    data: {
-                        products_ID: products_ID,
-                        quantity: quantity
-                    },
-                    success: function (response) {
-                        console.log('Server response:', response);
-                        // You can update the UI or perform additional actions based on the server response
-                    },
-                    error: function (error) {
-                        console.error('Error updating quantity:', error);
-                    }
-                });
-            });
-        });
-
-
+        
 
     </script>
 
