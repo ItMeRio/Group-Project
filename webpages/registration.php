@@ -1,7 +1,8 @@
 <?php
 session_start();
 if(isset($_SESSION["user"])) {
- header("Location: index.php");
+    header("Location: index.php");
+    exit; // Add an exit after the redirect to stop further execution
 }
 ?>
 <!DOCTYPE html>

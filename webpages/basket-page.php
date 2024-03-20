@@ -140,19 +140,12 @@ include("connect.php")
   color: black;
 }
 
-
-
-
 .quantity_box{
   color:black;
   padding:15px;
 }
 
-.bottom_btn{
-  color:black;
-  background-color: black;
 
-}
 
   </style>
 </head>
@@ -164,7 +157,7 @@ include("connect.php")
        
           
           <div class="product">
-            <h1>My Cart</h1>
+            <h1 style= "color:black;">My Cart</h1>
             <table>
               <?php 
               $select_cart_products = mysqli_query($conn, "Select * from `cart`");
@@ -198,7 +191,7 @@ include("connect.php")
                 echo '</div>';
                 echo '</form>';
                 echo '</td>';
-                echo '<td></td>'; // Assuming 'total_price' is the column name for total price
+                echo '<td></td>'; 
                 echo '<td>';
                 echo '<a href="#"><i class="fa fa-trash"></i> Remove</a>';
                 echo '</td>';
@@ -207,10 +200,11 @@ include("connect.php")
             }
             
             
-              }else{
-                echo "No products";
-              }
-
+              }else {
+                echo "<div style='background-color: #333; padding: 10px; border: 1px solid #ddd; border-radius: 5px;'>";
+                echo "<span style='color: white;'>No products!</span>";
+                echo "</div>";
+            }
               ?>
               
               
@@ -218,9 +212,10 @@ include("connect.php")
               </tbody>
             </table>
             <div class="table_bottom">
-              <a href ="products-page.php" class = "bottom_btn" style="color: black; background-color: white;">Continue Shopping</a>
-              <h3 class="bottom_btn"></h3>Basket total: <span>242</span>
-            </div>
+    <a href="products-page.php" class="bottom_btn" style="padding: 10px 20px; background-color: #333; color: white; text-align: center; text-decoration: none; border-radius: 5px; border: none; cursor: pointer;">Continue Shopping</a>
+    <h3>Basket total: <span>242</span></h3>
+</div>
+
           </div>
           <a href= "" class="delete_all_btn">
           <i class= "fa fa-trash"></i>Delete all
