@@ -63,7 +63,7 @@ include 'connect.php';
     <div class="container">
       <div class="basket-left">
         <div class="form-box"> <!-- Adding box around the form -->
-          <h2>Sign In</h2>
+          <h2>Log In</h2>
           <form action="signin.php" method="post">
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" placeholder="Enter your email address">
