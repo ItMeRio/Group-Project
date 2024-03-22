@@ -8,13 +8,16 @@ if(isset($_SESSION["user"])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<?php include_once("includes/include.php") ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registartion form</title>
+    <title>Registration form</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<main>
+<?php include_once("includes/navbar.php") ?>
     <div class="container">
         <?php
        if(isset($_POST["submit"])) {
@@ -29,31 +32,31 @@ if(isset($_SESSION["user"])) {
 
 
         if (empty($fullName) OR empty($email) OR empty($password) OR empty($passwordRepeat)) {
-        array_push($errors,"All fields are required");
+            array_push($errors,"All fields are required");
         }
         if (!filter_var($email,FILTER_VALIDATE_EMAIL)) {
-        array_push($errors,"Email is not valid");
+            array_push($errors,"Email is not valid");
         }
         if (strlen($password)<8) {
-        array_push($errors,"Password must be at least 8 characters long");
+            array_push($errors,"Password must be at least 8 characters long");
         }
         if($password!==$passwordRepeat) {
-        array_push($errors,"Password does not match");
-         }
-         require_once "connect.php";
-         $sql = "SELECT * FROM users WHERE email =  '$email'";
-         $result = mysqli_query($conn,$sql);
-         $rowCount = mysqli_num_rows($result);
-         if($rowCount>0) {
-        array_push($errors,"Email already exists!");
-         }
+            array_push($errors,"Password does not match");
+        }
+        require_once "connect.php";
+        $sql = "SELECT * FROM users WHERE email =  '$email'";
+        $result = mysqli_query($conn,$sql);
+        $rowCount = mysqli_num_rows($result);
+        if($rowCount>0) {
+            array_push($errors,"Email already exists!");
+        }
 
 
         if (count($errors)>0) {
-        foreach ($errors as $error) {
-            echo "<div class='alert alert-danger'>$error</div>";
-        }
-        }else {
+            foreach ($errors as $error) {
+                echo "<div class='alert alert-danger'>$error</div>";
+            }
+        } else {
             
             $sql = "INSERT INTO users(fullName ,email,password) VALUES (?,?,?)";
             $stmt = mysqli_stmt_init($conn);
@@ -61,13 +64,14 @@ if(isset($_SESSION["user"])) {
             if ($prepareStmt) {
                 mysqli_stmt_bind_param($stmt,"sss",$fullName,$email,$passwordHash);
                 mysqli_stmt_execute($stmt);
-                echo "<div class='alert alert-success'>You are registered succesfully.</div>";
-            }else{
+                echo "<div class='alert alert-success'>You are registered successfully.</div>";
+                header("Location: login.php"); // Redirect to login.php after successful registration
+                exit; // Stop further execution
+            } else {
                 die("Something went wrong");
             }
         }
        }
-
         ?>
         <form action="registration.php" method="post">
             <div class="form-group">
@@ -83,12 +87,14 @@ if(isset($_SESSION["user"])) {
                 <input type="password" class="form-control" name="repeat_password" placeholder="Repeat Password:">
             </div>
              <div class="form-btn">
-                <input type="submit" class="btn btn-primary" value="Register"name="submit">
+                <input type="submit" class="btn btn-primary" value="Register" name="submit">
              </div>
         </form>
         <div>
-        <div><p>Already registered <a href ="login.php">Login Here</a></p></div>
+            <div><p>Already registered <a href ="login.php">Login Here</a></p></div>
         </div>
     </div>
+</main>
+<?php include_once("includes/footer.php") ?>
 </body>
 </html>

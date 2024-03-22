@@ -7,7 +7,7 @@ if(isset($_POST['add_to_cart'])){
     $img = $_POST['product_img'];
     $product_quantity = 1;
 
-    $select_cart = mysqli_query($conn, "Select * from `cart` where name = '$product_name'");
+    $select_cart = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name'");
     if(mysqli_num_rows($select_cart)>0){
         $display_message[] = "Product already added to cart!";
     }else{
@@ -16,27 +16,34 @@ if(isset($_POST['add_to_cart'])){
     }   
 
        
-    
-
-    
-
-
 }
 
 if (isset($_GET['search'])) {
-    $search = mysqli_real_esca1pe_string($conn, $_GET['search']);
+    $search = mysqli_real_escape_string($conn, $_GET['search']);
 
     // Modify the SQL query to include a WHERE clause for searching
     $sql = "SELECT products_ID, product_name, price, img, color, brand, categories, section FROM products WHERE product_name LIKE '%$search%'";
 
+   
+
+    $result_products = $conn->query($sql); // Store the result in a different variable
+
+
+    
+
+
+    if ($result_products->num_rows == 0) {
+        // Display message when no results are found
+        $display_message[] = "No matching results found for '$search'.";
+    }
 } else {
     // Default query without search filter
-    $sql = "SELECT products_ID, product_name, price, img, color, brand, categories, section FROM products";
+    $sql = "SELECT * FROM products";
+    $result_products = $conn->query($sql); // Store the result in a different variable
 }
 
-$result_products = $conn->query($sql); // Store the result in a different variable
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +65,7 @@ $result_products = $conn->query($sql); // Store the result in a different variab
         <div id="search-container">
             <form method="GET" action="">
                 <input type="text" id="search-bar" name="search" class="input" placeholder="Search...">
-                <button type="submit" id="search-btn">Search</button>
+                <input type="submit" id="search-btn" name ="submit">
             </form>
         </div>
        
@@ -152,31 +159,47 @@ $result_products = $conn->query($sql); // Store the result in a different variab
     
     ?>
     <div id="product-container">
-        <?php
-        $select_products = mysqli_query($conn, "SELECT * FROM `products`");
-        if(mysqli_num_rows($select_products) > 0) {
-            while($fetch_product = mysqli_fetch_assoc($select_products)) {
-                // Product inside a row
-                echo '<div class="product" data-brand="' . $fetch_product["brand"] . '" data-color="' . $fetch_product["color"] . '" data-categories="' . $fetch_product["categories"] . '">';
+    <?php
+    // Check if there are search results
+    if (isset($result_products)) {
+        if ($result_products->num_rows > 0) {
+            while ($fetch_product = $result_products->fetch_assoc()) {
+                // Display each search result
+                echo '<div class="product">';
                 echo '<img src="data:image/jpeg;base64,' . base64_encode($fetch_product['img']) . '"/>';
                 echo '<h5 class="name">' . $fetch_product["product_name"] . '</h5>';
-                echo '<p class="details">' . $fetch_product["brand"] . ', ' . $fetch_product["color"] . '</p>';
-                echo '<p>£' . $fetch_product["price"] . '</p>';
+                echo '<p class="details">Brand: ' . $fetch_product["brand"] . ', Color: ' . $fetch_product["color"] . '</p>';
+                echo '<p>Price: £' . $fetch_product["price"] . '</p>';
                 echo '<form method="POST">';
-                echo '<input type="hidden" name="product_ID">';
-                echo '<input type="hidden" name="price" value="' . $fetch_product['price'] . '">';
                 echo '<input type="hidden" name="product_name" value="' . $fetch_product['product_name'] . '">';
-                echo '<input type="hidden" name="brand" value="' . $fetch_product['brand'] . '">';
+                echo '<input type="hidden" name="price" value="' . $fetch_product['price'] . '">';
                 echo '<input type="hidden" name="product_img" value="' . base64_encode($fetch_product['img']) . '">';
-                echo '<input value="Add to Cart" type="submit" class="add-to-cart" name="add_to_cart">';
+                echo '<input type="submit" class="add-to-cart" name="add_to_cart" value="Add to Cart">';
                 echo '</form>';
                 echo '</div>';
             }
-        } else {
-            echo "No products";
+        } 
+    } else {
+        // Display all products if there are no search results
+        while ($fetch_product = mysqli_fetch_assoc($select_products)) {
+            // Display each product
+            echo '<div class="product">';
+            echo '<img src="data:image/jpeg;base64,' . base64_encode($fetch_product['img']) . '"/>';
+            echo '<h5 class="name">' . $fetch_product["product_name"] . '</h5>';
+            echo '<p class="details">Brand: ' . $fetch_product["brand"] . ', Color: ' . $fetch_product["color"] . '</p>';
+            echo '<p>Price: £' . $fetch_product["price"] . '</p>';
+            echo '<form method="POST">';
+            echo '<input type="hidden" name="product_name" value="' . $fetch_product['product_name'] . '">';
+            echo '<input type="hidden" name="price" value="' . $fetch_product['price'] . '">';
+            echo '<input type="hidden" name="product_img" value="' . base64_encode($fetch_product['img']) . '">';
+            echo '<input type="submit" class="add-to-cart" name="add_to_cart" value="Add to Cart">';
+            echo '</form>';
+            echo '</div>';
         }
-        ?>
-    </div>
+    }
+    ?>
+</div>
+
 </section>
 
                 </div>
@@ -236,4 +259,3 @@ $result_products = $conn->query($sql); // Store the result in a different variab
 </body>
 
 </html>
-
