@@ -24,7 +24,7 @@ if(isset($_POST['add_to_cart'])){
 }
 
 if (isset($_GET['search'])) {
-    $search = mysqli_real_escape_string($conn, $_GET['search']);
+    $search = mysqli_real_esca1pe_string($conn, $_GET['search']);
 
     // Modify the SQL query to include a WHERE clause for searching
     $sql = "SELECT products_ID, product_name, price, img, color, brand, categories, section FROM products WHERE product_name LIKE '%$search%'";
@@ -135,12 +135,18 @@ $result_products = $conn->query($sql); // Store the result in a different variab
                 <section>
     <h2>Featured Products</h2>
     <?php
-    if(isset($display_message)){
-        foreach($display_message as $display_message){
-        echo "<div class='display_message'>
-        <span>$display_message</span>
-        <i class = 'fas fa-times' onClick='this.parentElement.style.display=`none`'; ></i>
-        </div>";
+    if (isset($display_message)) {
+        foreach ($display_message as $message) {
+            // Check if the message contains "Product added to cart" (success)
+            if (strpos($message, "Product added to cart") !== false) {
+                echo "<div class='display_message success'>";
+            } else {
+                echo "<div class='display_message error'>";
+            }
+            
+            echo "<span>$message</span>";
+            echo "<i class='fas fa-times' onClick='this.parentElement.style.display=`none`'; ></i>";
+            echo "</div>";
         }
     }
     

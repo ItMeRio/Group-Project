@@ -1,5 +1,28 @@
 <?php 
-include("connect.php")
+session_start();
+include("connect.php");
+
+if(isset($_POST['update_product_quantity'])){
+  $update_value = $_POST['update_quantity'];
+  $update_id = $_POST['update_quantity_id'];
+  $update_quantity_query= mysqli_query($conn, "update `cart` set quantity=$update_value where id = $update_id");
+  if($update_quantity_query){
+    $display_message = "Cart updated successfully"; // Set the message
+    //header('location:basket-page.php'); // No need to redirect
+  }
+}
+
+if(isset($_GET['remove'])){
+  $remove_id = $_GET['remove'];
+  mysqli_query($conn, "Delete from `cart` where id = $remove_id");
+  header('location:basket-page.php');
+}
+
+if(isset($_GET['delete_all'])){
+  mysqli_query($conn, "Delete from `cart`");
+  header('location:basket-page.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -145,6 +168,111 @@ include("connect.php")
   padding:15px;
 }
 
+.table_bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.continue-shopping {
+    /* Set flex-grow to 1 to allow the button to take up available space */
+    flex-grow: 1;
+    /* Adjust text-align to align the button's text to the left */
+    text-align: left;
+}
+
+.basket-total {
+    /* Adjust text-align to align the basket total text to the right */
+    text-align: right;
+}
+
+.bottom_btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    /* Remove display: inline-block; */
+}
+
+.bottom_btn:hover {
+    background-color: #0056b3;
+}
+
+
+/* Style for the table header */
+thead {
+    background-color: #007bff; /* Header background color */
+    color: white; /* Header text color */
+}
+
+/* Style for table rows */
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2; /* Alternate row background color */
+}
+
+/* Style for table cells */
+th, td {
+    padding: 15px; /* Adjust cell padding */
+}
+
+/* Hover effect for table rows */
+tbody tr:hover {
+    background-color: #cce5ff; /* Hover background color */
+}
+
+
+/* Style for the bottom of the table */
+.table_bottom {
+    background-color: #f8f9fa; /* Background color */
+    border-top: 2px solid #ccc; /* Top border */
+    padding: 20px; /* Padding */
+}
+
+.empty-cart-message {
+    background-color: #f2f2f2;
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.empty-cart-message h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.empty-cart-message p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.explore-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.explore-btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+
+
+
 
 
   </style>
@@ -158,10 +286,17 @@ include("connect.php")
           
           <div class="product">
             <h1 style= "color:black;">My Cart</h1>
+            <?php if(isset($display_message)): ?>
+              <div class="display_message success">
+                <span><?php echo $display_message; ?></span>
+                <i class="fas fa-times" onClick="this.parentElement.style.display='none';"></i>
+              </div>
+            <?php endif; ?>
             <table>
               <?php 
               $select_cart_products = mysqli_query($conn, "Select * from `cart`");
               $num = 1;
+              $grand_total =0;
               if(mysqli_num_rows($select_cart_products)>0){
                 echo "
                 <thead>
@@ -182,49 +317,62 @@ include("connect.php")
                 echo '<td>' . $num . '</td>'; // Assuming this is the serial number of the product
                 echo '<td>' . $fetch_cart_products['name'] . '</td>'; // Assuming 'name' is the column name for product name
                 echo '<td><img src="data:image/jpeg;base64,' . $fetch_cart_products['image'] . '"></td>'; // Displaying the image
-                echo '<td>' . $fetch_cart_products['price'] . '</td>'; // Assuming 'price' is the column name for product price
+                echo '<td>£' . $fetch_cart_products['price'] . '</td>'; // Assuming 'price' is the column name for product price
                 echo '<td>';
                 echo '<form action = "" method = "post">';
+                echo '<input type="hidden" name="update_quantity_id" value="' . $fetch_cart_products['id'] . '">';
                 echo '<div class="quantity_box">';
-                echo '<input type="number" class="update" min="1" value="' . $fetch_cart_products['quantity'] . '">';
-                echo '<input type="submit" class="update_quantity" value="Update" style = "margin:10px;">';
+                echo '<input type="number" name="update_quantity" class="update" min="1" value="' . $fetch_cart_products['quantity'] . '">';
+                echo '<input type="submit" name="update_product_quantity" class="update_quantity" value="Update" style = "margin:10px;">';
                 echo '</div>';
                 echo '</form>';
                 echo '</td>';
-                echo '<td></td>'; 
+                echo '<td>£' . $subtotal =($fetch_cart_products['price'])*($fetch_cart_products['quantity']) . '</td>';; 
                 echo '<td>';
-                echo '<a href="#"><i class="fa fa-trash"></i> Remove</a>';
+                echo '<a href="basket-page.php?remove=' . $fetch_cart_products['id'] . '" onclick="return confirm(\'Are you sure you want to remove this item?\')"><i class="fa fa-trash"></i> Remove</a>';
                 echo '</td>';
                 echo '</tr>';
+                $grand_total = $grand_total+($fetch_cart_products['price'])*($fetch_cart_products['quantity']);
                 $num++;
             }
             
             
               }else {
-                echo "<div style='background-color: #333; padding: 10px; border: 1px solid #ddd; border-radius: 5px;'>";
-                echo "<span style='color: white;'>No products!</span>";
+                echo "<div class='empty-cart-message'>";
+                echo "<h2>Your Cart is Empty</h2>";
+                echo "<p>Looks like you haven't added any items to your cart yet.</p>";
+                echo "<p>Explore our products and find something you love!</p>";
+                echo "<a href='products-page.php' class='explore-btn'>Explore Products</a>";
                 echo "</div>";
             }
-              ?>
+            ?>
               
               
         
               </tbody>
             </table>
-            <div class="table_bottom">
-    <a href="products-page.php" class="bottom_btn" style="padding: 10px 20px; background-color: #333; color: white; text-align: center; text-decoration: none; border-radius: 5px; border: none; cursor: pointer;">Continue Shopping</a>
-    <h3>Basket total: <span>242</span></h3>
-</div>
+
+            <?php 
+            if($grand_total >0){
+              echo "<div class='table_bottom'>
+              <div class='continue-shopping'>
+              <a href='products-page.php' class='bottom_btn' >Continue Shopping</a>
+              </div>
+              <div class='basket-total'>
+              <h3>Basket total: <span>£" . $grand_total . "</span></h3>
+              </div>
+          </div>";
+            
+            ?>
+            
 
           </div>
-          <a href= "" class="delete_all_btn">
-          <i class= "fa fa-trash"></i>Delete all
-          </a>
-        
-        
-         
-        
-      </div>
+          <a href="basket-page.php?delete_all=true" class="delete_all_btn" onclick="return confirm('Are you sure you want to delete all items?');">
+    <i class="fa fa-trash"></i>Delete all
+</a>
+
+
+          </div>
       <div class="basket-right">
         <div class="pay-with">
           <h2>Pay With</h2>
@@ -254,11 +402,22 @@ include("connect.php")
           <button class="btn">Apply</button>
         </div>
         <div class="shipping-button">
-          <button class="btn">Continue to Shipping</button>
+          <button class="btn"><i class="fa fa-credit-card" aria-hidden="true"></i> Checkout</button>
     
         </div>
       </div>
     </div>
+          <?php
+            }else{
+              echo"";
+            }
+
+            ?>
+        
+        
+         
+        
+      
   </main>
   <?php include_once("includes/footer.php") ?>
 </body>

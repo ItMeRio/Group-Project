@@ -49,3 +49,23 @@
    background-color: #046865;
    /* Darker grey on hover */
  }
+
+ .success-message {
+  background-color: #dff0d8;
+  border: 1px solid #d6e9c6;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.success-icon {
+  margin-right: 10px;
+  color: #3c763d;
+  font-size: 24px;
+}
+
+.success-text {
+  color: #3c763d;
+}
