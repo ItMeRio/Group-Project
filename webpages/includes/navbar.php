@@ -10,10 +10,10 @@
         <a href="contact-us.php">Contact Us</a>
         <a href="about-us.php">About Us</a>
         <a href="sing-in.php">Sign in</a>
+        <a href="myprofile.php">My Profile</a>
         <?php
         if (!isset($_SESSION["user"])) { ?>
             <a href="register.php">Register</a>
-            <a href="login.php">Log In</a>
         <?php } else { ?>
             <a href="user.php">User</a>
             ?>
