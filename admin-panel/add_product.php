@@ -7,12 +7,12 @@ $success_message = '';
 // Handle Add Product
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $productName = $_POST['product_name'];
-    $sectionId = $_POST['section_id']; // Ensure this field exists in your form
     $description = $_POST['description'];
     $price = $_POST['price'];
     $stockQuantity = $_POST['stock_quantity'];
     $brand = $_POST['brand'];
     $color = $_POST['color'];
+    $categories = $_POST['categories']; // Add this line
     $imageContent = null;
 
     // Image Upload Logic
@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (!$error_message) {
         try {
-            // Insert product data into the database
-            $stmt = $conn->prepare("INSERT INTO products (product_name, section_id, description, price, stock_quantity, brand, color, img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$productName, $sectionId, $description, $price, $stockQuantity, $brand, $color, $imageContent]);
+            // Insert product data into the database, matching the column names
+            $stmt = $conn->prepare("INSERT INTO products (product_name, description, price, stock_quantity, brand, color, img, categories) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$productName, $description, $price, $stockQuantity, $brand, $color, $imageContent, $categories]);
             $success_message = 'Product added successfully.';
         } catch(PDOException $e) {
             $error_message = "Error: " . $e->getMessage();
@@ -37,12 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Add Product</title>
-    <!-- Add CSS here -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -120,8 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label for="product_name">Product Name:</label>
             <input type="text" id="product_name" name="product_name" required>
             
-            <label for="section_id">Section ID:</label>
-            <input type="number" id="section_id" name="section_id" required>
+            <label for="categories">Categories:</label>
+            <input type="text" id="categories" name="categories" required>
 
             <label for="description">Description:</label>
             <textarea id="description" name="description"></textarea>

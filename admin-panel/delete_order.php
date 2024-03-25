@@ -10,12 +10,9 @@ if (isset($_GET['order_id'])) {
         $conn->beginTransaction();
 
         // Delete order items first to maintain referential integrity
-        $stmtItems = $conn->prepare("DELETE FROM order_items WHERE order_id = ?");
+        $stmtItems = $conn->prepare("DELETE FROM orders WHERE order_id = ?");
         $stmtItems->execute([$orderId]);
 
-        // Delete the order
-        $stmtOrder = $conn->prepare("DELETE FROM orders WHERE order_id = ?");
-        $stmtOrder->execute([$orderId]);
 
         // Commit transaction
         $conn->commit();

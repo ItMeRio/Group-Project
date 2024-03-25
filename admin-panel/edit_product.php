@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update'])) {
     // Additional fields...
 
     try {
-        $update_stmt = $conn->prepare("UPDATE products SET product_name = ?, price = ? /* , other fields */ WHERE product_id = ?");
+        $update_stmt = $conn->prepare("UPDATE products SET product_name = ?, price = ? WHERE product_id = ?");
         $update_stmt->execute([$productName, $price /* , other variables */, $productId]);
         $success_message = 'Product updated successfully.';
     } catch(PDOException $e) {

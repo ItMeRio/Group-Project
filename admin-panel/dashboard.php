@@ -2,25 +2,27 @@
 session_start();
 
 // Redirect if not an admin
-if (!isset($_SESSION['account_type']) || $_SESSION['account_type'] != 'admin') {
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'admin') {
     header('Location: login.php');
     exit();
 }
 
 // Database Connection
-require 'connection.php';
+require '../webpages/connect.php'; // Ensure this file returns a mysqli connection object
 
-try {
-    // Example query: Total number of orders
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM orders");
-    $stmt->execute();
-    $totalOrders = $stmt->fetchColumn();
+// Total number of orders
+$query = "SELECT COUNT(*) FROM orders";
+$result = $conn->query($query);
 
-} catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
+if ($result) {
+    $row = $result->fetch_array();
+    $totalOrders = $row[0];
+} else {
+    echo "Query failed: " . $conn->error;
     exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,9 +43,10 @@ try {
     </div>
 
     <div class="stats">
+        <!-- Stats go here -->
         <h2>Statistics</h2>
         <p>Total Orders: <?php echo $totalOrders; ?></p>
-        <!-- Add more statistics here -->
+        
     </div>
 
     <div class="management">
@@ -53,6 +56,7 @@ try {
         <a href="manage_customers.php">Manage Customers</a>
         <a href="manage_admin.php">Manage Admins</a> <!-- Link to Manage Admins -->
         <a href="manage_reviews.php">Manage Reviews</a>
+        <a href="../webpages/index.php">Main Website</a>
         <!-- Add more links as necessary -->
     </div>
 </body>

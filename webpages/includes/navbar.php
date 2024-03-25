@@ -10,6 +10,8 @@ include 'connect.php';
         <a href="products-page.php">Products</a>
         <a href="contact-us.php">Contact Us</a>
         <a href="about-us.php">About Us</a>
+        <a href="../admin-panel/dashboard.php">Admin Dashboard</a>
+
         <?php
         if (!isset($_SESSION["user"])) { ?>
             <a href="login.php">Sign in</a>

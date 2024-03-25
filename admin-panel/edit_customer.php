@@ -6,11 +6,11 @@ $success_message = '';
 $customer = null;
 
 // Fetch customer details for editing
-if (isset($_GET['user_id'])) {
-    $userId = $_GET['user_id'];
+if (isset($_GET['users_id'])) {
+    $userId = $_GET['usesr_id'];
 
     try {
-        $stmt = $conn->prepare("SELECT * FROM users WHERE user_id = ? AND account_type = 'customer'");
+        $stmt = $conn->prepare("SELECT * FROM users WHERE users_id = ? AND user_type = 'client'");
         $stmt->execute([$userId]);
         $customer = $stmt->fetch();
 
@@ -25,12 +25,12 @@ if (isset($_GET['user_id'])) {
 
 // Handle Update Customer
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
+    $fullName = $_POST['fullName'];
     $email = $_POST['email'];
     // Additional fields as necessary...
 
     try {
-        $update_stmt = $conn->prepare("UPDATE users SET username = ?, email = ? WHERE user_id = ?");
+        $update_stmt = $conn->prepare("UPDATE users SET fullName = ?, email = ? WHERE user_id = ?");
         $update_stmt->execute([$username, $email, $userId]);
         $success_message = 'Customer updated successfully.';
     } catch(PDOException $e) {
@@ -45,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Edit Customer</title>
-    <!-- Add CSS here -->
 </head>
 <body>
     <div class="container">
@@ -62,17 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Edit Customer Form -->
         <?php if ($customer): ?>
         <form method="post">
-            <input type="hidden" name="user_id" value="<?php echo $customer['user_id']; ?>">
+            <input type="hidden" name="users_id" value="<?php echo $customer['users_id']; ?>">
 
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required
-                   value="<?php echo htmlspecialchars($customer['username']); ?>">
+            <label for="fullName">fullName:</label>
+            <input type="text" id="fullName" name="fullName" required
+                   value="<?php echo htmlspecialchars($customer['fullName']); ?>">
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required
                    value="<?php echo htmlspecialchars($customer['email']); ?>">
-
-            <!-- Additional form fields as needed... -->
 
             <button type="submit">Update Customer</button>
         </form>

@@ -25,12 +25,12 @@ if (isset($_GET['order_id'])) {
 
 // Handle Update Order
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $customer_id = $_POST['customer_id'];
+    $users_id = $_POST['users_id'];
     $status = $_POST['status'];
-    // Additional fields...
+    
 
     try {
-        $update_stmt = $conn->prepare("UPDATE orders SET customer_id = ?, status = ? WHERE order_id = ?");
+        $update_stmt = $conn->prepare("UPDATE orders SET users_id = ?, status = ? WHERE order_id = ?");
         $update_stmt->execute([$customer_id, $status, $orderId]);
         $success_message = 'Order updated successfully.';
         header("Location: manage_orders.php");
@@ -47,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Edit Order</title>
-    <!-- Add CSS here -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -104,15 +103,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form method="post">
             <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
 
-            <label for="customer_id">Customer ID:</label>
+            <label for="users_id">User ID:</label>
             <input type="number" id="customer_id" name="customer_id" required
                    value="<?php echo htmlspecialchars($order['customer_id']); ?>">
 
             <label for="status">Status:</label>
             <input type="text" id="status" name="status" required
                    value="<?php echo htmlspecialchars($order['status']); ?>">
-
-            <!-- Additional form fields... -->
 
             <button type="submit">Update Order</button>
         </form>

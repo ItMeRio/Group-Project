@@ -2,41 +2,44 @@
 session_start();
 
 // Include the database connection file
-require 'connection.php';
+require '../webpages/connect.php'; // Ensure this file returns a mysqli connection object
 
 $error_message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = $_POST['password'];
 
-    try {
-        $stmt = $conn->prepare("SELECT user_id, username, password_hash, account_type FROM users WHERE username = ?");
-        $stmt->execute([$username]);
-        if ($stmt->rowCount() === 1) {
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            if (password_verify($password, $user['password_hash'])) {
-                session_regenerate_id();
-                $_SESSION['user_id'] = $user['user_id'];
-                $_SESSION['account_type'] = $user['account_type'];
-                if ($user['account_type'] === 'admin') {
-                    header('Location: dashboard.php');
-                    exit();
-                } else {
-                    header('Location: index.php');
-                    exit();
-                }
+    // Adjust the query to match the column names in your table
+    $stmt = $conn->prepare("SELECT users_id, fullName, password, user_type FROM users WHERE fullName = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            session_regenerate_id();
+            $_SESSION['users_id'] = $user['users_id'];
+            $_SESSION['user_type'] = $user['user_type'];
+
+            if ($user['user_type'] === 'admin') {
+                header('Location: dashboard.php');
+                exit();
             } else {
-                $error_message = 'Invalid username or password.';
+                header('Location: index.php');
+                exit();
             }
         } else {
             $error_message = 'Invalid username or password.';
         }
-    } catch (PDOException $e) {
-        $error_message = "Error: " . $e->getMessage();
+    } else {
+        $error_message = 'Invalid username or password.';
     }
 }
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
