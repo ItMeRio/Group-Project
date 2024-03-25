@@ -1,16 +1,20 @@
 <?php
 include 'connect.php';
 session_start();
+
+// Redirect to index.php if user is already logged in
 if (isset($_SESSION["user"])) {
     header("Location: index.php");
+    exit; // Terminate script execution after redirection
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <?php include_once("includes/include.php") ?>
-
 </head>
 
 <body>
@@ -28,20 +32,17 @@ if (isset($_SESSION["user"])) {
                 $user = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 if ($user) {
                     if (password_verify($password, $user["password"])) {
-                        session_start();
-                        $_SESSION["user"] = "yes";
-                        header("location: index.php");
-                        die();
+                        // Set user information in session
+                        $_SESSION["user"] = $user;
+                        header("Location: index.php");
+                        exit; // Terminate script execution after redirection
                     } else {
-                        echo "<div class='alert alert-danger'> Password does not match</div>";
+                        echo "<div class='alert alert-danger'>Password does not match</div>";
                     }
                 } else {
-
                     echo "<div class='alert alert-danger'>Email does not match</div>";
                 }
-
             }
-
             ?>
             <form action="login.php" method="post">
                 <div class="form-group">
@@ -63,6 +64,5 @@ if (isset($_SESSION["user"])) {
     <?php include_once("includes/footer.php") ?>
 
 </body>
-
 
 </html>

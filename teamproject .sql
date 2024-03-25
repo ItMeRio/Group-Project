@@ -59,6 +59,7 @@ CREATE TABLE `contactus` (
   `contactus_ID` int(11) NOT NULL,
   `contactus_email` varchar(255) NOT NULL,
   `subject` varchar(30) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

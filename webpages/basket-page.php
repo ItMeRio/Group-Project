@@ -1,29 +1,97 @@
-<?php 
+<?php
 session_start();
 include("connect.php");
 
+// Handle product quantity updates
 if(isset($_POST['update_product_quantity'])){
-  $update_value = $_POST['update_quantity'];
-  $update_id = $_POST['update_quantity_id'];
-  $update_quantity_query= mysqli_query($conn, "update `cart` set quantity=$update_value where id = $update_id");
-  if($update_quantity_query){
-    $display_message = "Cart updated successfully"; // Set the message
-    //header('location:basket-page.php'); // No need to redirect
-  }
+    $update_value = $_POST['update_quantity'];
+    $update_id = $_POST['update_quantity_id'];
+    $update_quantity_query = mysqli_query($conn, "UPDATE `cart` SET quantity = $update_value WHERE id = $update_id");
+    if($update_quantity_query){
+        $display_message = "Cart updated successfully";
+        // No need to redirect here since it's an AJAX request
+    }
 }
 
+// Handle item removal
 if(isset($_GET['remove'])){
-  $remove_id = $_GET['remove'];
-  mysqli_query($conn, "Delete from `cart` where id = $remove_id");
-  header('location:basket-page.php');
+    $remove_id = $_GET['remove'];
+    mysqli_query($conn, "DELETE FROM `cart` WHERE id = $remove_id");
+    header('location:basket-page.php');
 }
 
+// Handle deleting all items from the cart
 if(isset($_GET['delete_all'])){
-  mysqli_query($conn, "Delete from `cart`");
-  header('location:basket-page.php');
+    mysqli_query($conn, "DELETE FROM `cart`");
+    header('location:basket-page.php');
 }
 
+// Handle order processing
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve form data
+    $street_line = isset($_POST['street_line']) ? $_POST['street_line'] : '';
+    $postcode = isset($_POST['postcode']) ? $_POST['postcode'] : '';
+    $city = isset($_POST['city']) ? $_POST['city'] : '';
+    $phone_number = isset($_POST['phone_number']) ? $_POST['phone_number'] : '';
+    $payment_method = isset($_POST['payment_method']) ? $_POST['payment_method'] : '';
+    $card_number = isset($_POST['card_number']) ? $_POST['card_number'] : '';
+
+    // Get the user ID from the session
+    $users_id = isset($_SESSION['users_id']) ? $_SESSION['users_id'] : 0;
+
+    // Calculate total price
+    $total_price = 0;
+    $select_cart_products = mysqli_query($conn, "SELECT * FROM `cart`");
+    while($fetch_cart_products = mysqli_fetch_assoc($select_cart_products)) {
+        $quantity_ordered = $fetch_cart_products['quantity'];
+        $subtotal = $fetch_cart_products['price'] * $quantity_ordered;
+        $total_price += $subtotal;
+    }
+    $users_id = isset($_SESSION['user']['users_id']) ? $_SESSION['user']['users_id'] : 0;
+    // Insert data into the "orders" table
+    $insert_order_query = "INSERT INTO orders (users_id, total_price, shipping_address, shipping_postcode, shipping_city, shipping_phone_number)
+                         VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $insert_order_query);
+    mysqli_stmt_bind_param($stmt, "idsssi", $users_id, $total_price, $street_line, $postcode, $city, $phone_number);
+    mysqli_stmt_execute($stmt);
+
+    // Retrieve the order ID of the newly inserted order
+    $order_id = mysqli_insert_id($conn);
+
+    // Insert data into the "payment_transactions" table
+    $insert_payment_query = "INSERT INTO payment_transactions (order_id, payment_method, payment_card_number, payment_amount)
+                           VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $insert_payment_query);
+    mysqli_stmt_bind_param($stmt, "issd", $order_id, $payment_method, $card_number, $total_price);
+    mysqli_stmt_execute($stmt);
+
+    // Insert data into the "order_details" table for each product in the cart
+    $select_cart_products = mysqli_query($conn, "SELECT * FROM `cart`");
+while ($fetch_cart_products = mysqli_fetch_assoc($select_cart_products)) {
+    $products_id = $fetch_cart_products['products_ID']; // Fetch the product ID from the cart
+    $quantity_ordered = $fetch_cart_products['quantity'];
+    $subtotal = $fetch_cart_products['price'] * $quantity_ordered;
+
+    $insert_order_details_query = "INSERT INTO order_details (order_id, products_id, quantity_ordered, subtotal)
+                                   VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $insert_order_details_query);
+
+    // Bind parameters dynamically
+    mysqli_stmt_bind_param($stmt, "iiid", $order_id, $products_id, $quantity_ordered, $subtotal);
+
+    // Execute the statement
+    mysqli_stmt_execute($stmt);
+}
+
+
+    // Redirect to a success page or display a success message
+    // header('location:success-page.php');
+}
 ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,14 +167,17 @@ if(isset($_GET['delete_all'])){
 
     .address-box,
     .promo-code-box,
-    .contact-box,
+    .contact-box
+    .payment-box,
     .shipping-button {
       margin-top: 20px;
     }
 
     .address-box label,
     .promo-code-box label,
-    .contact-box label {
+    .contact-box label
+    .payment-box label
+    .card_number label {
       font-weight: bold;
       display: block;
       margin-bottom: 5px;
@@ -115,7 +186,8 @@ if(isset($_GET['delete_all'])){
     .address-box input[type="text"],
     .address-box input[type="number"],
     .promo-code-box input[type="text"],
-    .contact-box input[type="email"] {
+    .contact-box input[type="text"],
+    .payment-box input[type="text"]{
       width: calc(100% - 20px); /* Adjusted width to account for padding */
       padding: 5px;
       margin-bottom: 10px;
@@ -373,39 +445,47 @@ tbody tr:hover {
 
 
           </div>
-      <div class="basket-right">
-        <div class="pay-with">
-          <h2>Pay With</h2>
-          <div class="payment-icons">
           
-            <img src="mastercard.png" alt="mastercard">
-            <img src="visa.png" alt="Visa">
-          </div>
-        </div>
-        <div class="address-box">
-          <h2>Address Information</h2>
-          <label for="street_line">Street Line:</label>
-          <input type="text" id="street_line" name="street_line" placeholder="Enter street address">
-          <label for="postcode">Postcode:</label>
-          <input type="text" id="postcode" name="postcode" placeholder="Enter postcode">
-          <label for="city">City:</label>
-          <input type="text" id="city" name="city" placeholder="Enter city">
-        </div>
-        <div class="contact-box">
-          <h2>Contact Information</h2>
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" placeholder="Enter your email address">
-        </div>
-        <div class="promo-code-box">
-          <h2>Apply Promo Code</h2>
-          <input type="text" id="promo_code" name="promo_code" placeholder="Enter promo code">
-          <button class="btn">Apply</button>
-        </div>
-        <div class="shipping-button">
-          <button class="btn"><i class="fa fa-credit-card" aria-hidden="true"></i> Checkout</button>
-    
-        </div>
+  <div class="basket-right">
+    <div class="pay-with">
+      <h2>Pay With</h2>
+      <div class="payment-icons">
+        <img src="mastercard.png" alt="mastercard">
+        <img src="visa.png" alt="Visa">
       </div>
+    </div>
+    <div class="address-box">
+      <h2>Shipping Information</h2>
+      <form action="" method="post">
+      <label for="street_line">Street Line:</label>
+      <input type="text" id="street_line" name="street_line" placeholder="Enter street address">
+      <label for="postcode">Postcode:</label>
+      <input type="text" id="postcode" name="postcode" placeholder="Enter postcode">
+      <label for="city">City:</label>
+      <input type="text" id="city" name="city" placeholder="Enter city">
+    </div>
+    <div class="contact-box">
+      <h2>Contact Information</h2>
+      <label for="phone_number">Phone Number:</label>
+      <input type="text" id="phone_number" name="phone_number" placeholder="Enter your phone number">
+    </div>
+
+    <div class="payment-box">
+      <h2>Payment Information</h2>
+      <label for="payment_method">Payment Method:</label>
+      <input type="text" id="payment_method" name="payment_method" placeholder="Enter payment method">
+      <label for="card_number">Card Number:</label>
+      <input type="text" id="card_number" name="card_number" placeholder="Enter Card Number">
+    </div>
+
+    <div class="shipping-button">
+      <button class="btn" type="submit"><i class="fa fa-credit-card" aria-hidden="true"></i> Checkout</button>
+    </div>
+  </div>
+</form>
+
+       
+      
     </div>
           <?php
             }else{
